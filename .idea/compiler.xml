@@ -6,11 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="everywhere" />
+        <module name="search" />
+        <module name="ui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="everywhere" target="1.5" />
+      <module name="search" target="1.5" />
+      <module name="ui" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
