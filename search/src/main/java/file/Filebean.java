@@ -1,6 +1,6 @@
 package file;
 
-public class Filebean {
+public class FileBean {
 
     private String filepath;
 
