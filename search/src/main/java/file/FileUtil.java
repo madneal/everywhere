@@ -1,7 +1,7 @@
 package file;
 
 import com.monitorjbl.xlsx.StreamingReader;
-import constants.CommonConstant;
+import constants.CommonConstants;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -34,7 +34,7 @@ public class FileUtil {
                     fileBeansAddForDirectory(fileBeans, file);
                 }
             } else {
-                if (CommonConstant.DOCFILES.contains(extName)) {
+                if (CommonConstants.DOCFILES.contains(extName)) {
 
                 }
             }
@@ -54,7 +54,7 @@ public class FileUtil {
     }
 
     private static boolean isPassExcludePath(String filePath) {
-        for (String excludePath : CommonConstant.EXCLUDE_FILE_PATHS) {
+        for (String excludePath : CommonConstants.EXCLUDE_FILE_PATHS) {
             if (filePath.contains(excludePath)) {
                 return false;
             }
@@ -197,4 +197,14 @@ public class FileUtil {
         }
         return result;
     }
+
+    public static List<String> getDriver() {
+        List<String> driverList = new ArrayList<>();
+        File[] fs = File.listRoots();
+        for (int i = 0; i < fs.length; i++) {
+            driverList.add(fs[i].getAbsolutePath());
+        }
+        return driverList;
+    }
+
 }

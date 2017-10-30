@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9a57a7b-314d-459a-af04-528f3be8bfa8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_poi_poi_3_16.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/search/src/main/java/constants/CommonConstant.java" afterPath="$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/everywhere.iml" afterPath="$PROJECT_DIR$/everywhere.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/search.iml" afterPath="$PROJECT_DIR$/search/search.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/src/main/java/file/FileUtil.java" afterPath="$PROJECT_DIR$/search/src/main/java/file/FileUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/ui.iml" afterPath="$PROJECT_DIR$/ui/ui.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,46 +19,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileBean.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/search/src/main/java/file/FileBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileUtil.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/search/src/main/java/file/FileUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="174" column="15" lean-forward="false" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="15" />
+            <state relative-caret-position="834">
+              <caret line="208" column="0" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#932#942#0" expanded="true" />
-                <element signature="e#3418#3451#0" expanded="true" />
-                <element signature="e#4624#4677#0" expanded="true" />
+                <element signature="e#933#943#0" expanded="true" />
+                <element signature="e#3421#3454#0" expanded="true" />
+                <element signature="e#4627#4680#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommonConstant.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstant.java">
+      <file leaf-file-name="IndexUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/index/IndexUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+            <state relative-caret-position="220">
+              <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,32 +46,132 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/pom.xml">
+      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ui/src/main/java/client/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+            <state relative-caret-position="66">
+              <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/search/pom.xml">
+      <file leaf-file-name="BaseIndex.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/index/BaseIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="372">
+              <caret line="34" column="84" lean-forward="false" selection-start-line="34" selection-start-column="84" selection-end-line="34" selection-end-column="84" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Condition.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/query/Condition.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#210#211#0" expanded="true" />
+                <element signature="e#246#247#0" expanded="true" />
+                <element signature="e#304#305#0" expanded="true" />
+                <element signature="e#354#355#0" expanded="true" />
+                <element signature="e#400#401#0" expanded="true" />
+                <element signature="e#436#437#0" expanded="true" />
+                <element signature="e#500#501#0" expanded="true" />
+                <element signature="e#550#551#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConditionUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/query/ConditionUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <file leaf-file-name="SearchUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/search/SearchUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="374">
+              <caret line="17" column="66" lean-forward="false" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LuceneConstants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/LuceneConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryResult.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/QueryResult.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#482#483#0" expanded="true" />
+                <element signature="e#517#518#0" expanded="true" />
+                <element signature="e#581#582#0" expanded="true" />
+                <element signature="e#629#630#0" expanded="true" />
+                <element signature="e#666#667#0" expanded="true" />
+                <element signature="e#698#699#0" expanded="true" />
+                <element signature="e#746#747#0" expanded="true" />
+                <element signature="e#781#782#0" expanded="true" />
+                <element signature="e#821#822#0" expanded="true" />
+                <element signature="e#857#858#0" expanded="true" />
+                <element signature="e#915#916#0" expanded="true" />
+                <element signature="e#965#966#0" expanded="true" />
+                <element signature="e#998#999#0" expanded="true" />
+                <element signature="e#1030#1031#0" expanded="true" />
+                <element signature="e#1077#1078#0" expanded="true" />
+                <element signature="e#1119#1120#0" expanded="true" />
+                <element signature="e#1160#1161#0" expanded="true" />
+                <element signature="e#1197#1198#0" expanded="true" />
+                <element signature="e#1257#1258#0" expanded="true" />
+                <element signature="e#1309#1310#0" expanded="true" />
+                <element signature="e#1341#1342#0" expanded="true" />
+                <element signature="e#1368#1369#0" expanded="true" />
+                <element signature="e#1409#1410#0" expanded="true" />
+                <element signature="e#1441#1442#0" expanded="true" />
+                <element signature="e#1481#1482#0" expanded="true" />
+                <element signature="e#1513#1514#0" expanded="true" />
+                <element signature="e#1567#1568#0" expanded="true" />
+                <element signature="e#1609#1610#0" expanded="true" />
+                <element signature="e#1653#1654#0" expanded="true" />
+                <element signature="e#1687#1688#0" expanded="true" />
+                <element signature="e#1747#1748#0" expanded="true" />
+                <element signature="e#1793#1794#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommonConstants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="18" column="41" lean-forward="false" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,7 +212,16 @@
         <option value="$USER_HOME$/.m2/settings.xml" />
         <option value="$PROJECT_DIR$/search/pom.xml" />
         <option value="$PROJECT_DIR$/ui/pom.xml" />
+        <option value="$PROJECT_DIR$/search/src/main/java/constants/LuceneConstants.java" />
+        <option value="$PROJECT_DIR$/search/src/main/java/index/BaseIndex.java" />
+        <option value="$PROJECT_DIR$/search/src/main/java/query/Condition.java" />
+        <option value="$PROJECT_DIR$/search/src/main/java/query/ConditionUtil.java" />
+        <option value="$PROJECT_DIR$/search/src/main/java/search/SearchUtil.java" />
+        <option value="$PROJECT_DIR$/search/src/main/java/index/IndexUtil.java" />
         <option value="$PROJECT_DIR$/search/src/main/java/file/FileUtil.java" />
+        <option value="$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java" />
+        <option value="$PROJECT_DIR$/search/src/main/java/QueryResult.java" />
+        <option value="$PROJECT_DIR$/ui/src/main/java/client/MainWindow.java" />
       </list>
     </option>
   </component>
@@ -158,6 +244,9 @@
     <option name="width" value="1550" />
     <option name="height" value="838" />
   </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -173,9 +262,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,18 +272,81 @@
             <path>
               <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
               <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
               <item name="everywhere" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="everywhere" type="b2602c69:ProjectViewProjectNode" />
+              <item name="everywhere" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -322,12 +471,12 @@
       <workItem from="1509278249045" duration="1305000" />
       <workItem from="1509279717578" duration="3964000" />
       <workItem from="1509285418152" duration="130000" />
-      <workItem from="1509361281966" duration="390000" />
+      <workItem from="1509361281966" duration="2169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9964000" />
+    <option name="totallyTimeSpent" value="11743000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1911" y="-9" width="1938" height="1058" extended-state="6" />
@@ -345,7 +494,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -389,7 +538,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstant.java">
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
@@ -429,9 +578,9 @@
           <caret line="117" column="0" lean-forward="true" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#932#942#0" expanded="true" />
-            <element signature="e#3418#3451#0" expanded="true" />
-            <element signature="e#4624#4677#0" expanded="true" />
+            <element signature="e#933#943#0" expanded="true" />
+            <element signature="e#3421#3454#0" expanded="true" />
+            <element signature="e#4627#4680#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -460,7 +609,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstant.java">
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
@@ -500,9 +649,9 @@
           <caret line="119" column="54" lean-forward="false" selection-start-line="119" selection-start-column="54" selection-end-line="119" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#932#942#0" expanded="true" />
-            <element signature="e#3418#3451#0" expanded="true" />
-            <element signature="e#4624#4677#0" expanded="true" />
+            <element signature="e#933#943#0" expanded="true" />
+            <element signature="e#3421#3454#0" expanded="true" />
+            <element signature="e#4627#4680#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -529,14 +678,14 @@
           <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#932#942#0" expanded="true" />
-            <element signature="e#3418#3451#0" expanded="true" />
-            <element signature="e#4624#4677#0" expanded="true" />
+            <element signature="e#933#943#0" expanded="true" />
+            <element signature="e#3421#3454#0" expanded="true" />
+            <element signature="e#4627#4680#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstant.java">
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
@@ -593,7 +742,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstant.java">
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
@@ -633,9 +782,9 @@
           <caret line="69" column="23" lean-forward="false" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#932#942#0" expanded="true" />
-            <element signature="e#3418#3451#0" expanded="true" />
-            <element signature="e#4624#4677#0" expanded="true" />
+            <element signature="e#933#943#0" expanded="true" />
+            <element signature="e#3421#3454#0" expanded="true" />
+            <element signature="e#4627#4680#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -649,16 +798,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/src/main/java/client.java" />
-    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.m2/settings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
@@ -706,16 +845,140 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search/src/main/java/file/FileUtil.java">
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/query/Condition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="174" column="15" lean-forward="false" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="15" />
+        <state relative-caret-position="550">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#932#942#0" expanded="true" />
-            <element signature="e#3418#3451#0" expanded="true" />
-            <element signature="e#4624#4677#0" expanded="true" />
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#246#247#0" expanded="true" />
+            <element signature="e#304#305#0" expanded="true" />
+            <element signature="e#354#355#0" expanded="true" />
+            <element signature="e#400#401#0" expanded="true" />
+            <element signature="e#436#437#0" expanded="true" />
+            <element signature="e#500#501#0" expanded="true" />
+            <element signature="e#550#551#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/query/ConditionUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/search/SearchUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="66" lean-forward="false" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/file/FileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="834">
+          <caret line="208" column="0" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#933#943#0" expanded="true" />
+            <element signature="e#3421#3454#0" expanded="true" />
+            <element signature="e#4627#4680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/index/BaseIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="34" column="84" lean-forward="false" selection-start-line="34" selection-start-column="84" selection-end-line="34" selection-end-column="84" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="41" lean-forward="false" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/constants/LuceneConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/QueryResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#482#483#0" expanded="true" />
+            <element signature="e#517#518#0" expanded="true" />
+            <element signature="e#581#582#0" expanded="true" />
+            <element signature="e#629#630#0" expanded="true" />
+            <element signature="e#666#667#0" expanded="true" />
+            <element signature="e#698#699#0" expanded="true" />
+            <element signature="e#746#747#0" expanded="true" />
+            <element signature="e#781#782#0" expanded="true" />
+            <element signature="e#821#822#0" expanded="true" />
+            <element signature="e#857#858#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#965#966#0" expanded="true" />
+            <element signature="e#998#999#0" expanded="true" />
+            <element signature="e#1030#1031#0" expanded="true" />
+            <element signature="e#1077#1078#0" expanded="true" />
+            <element signature="e#1119#1120#0" expanded="true" />
+            <element signature="e#1160#1161#0" expanded="true" />
+            <element signature="e#1197#1198#0" expanded="true" />
+            <element signature="e#1257#1258#0" expanded="true" />
+            <element signature="e#1309#1310#0" expanded="true" />
+            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1368#1369#0" expanded="true" />
+            <element signature="e#1409#1410#0" expanded="true" />
+            <element signature="e#1441#1442#0" expanded="true" />
+            <element signature="e#1481#1482#0" expanded="true" />
+            <element signature="e#1513#1514#0" expanded="true" />
+            <element signature="e#1567#1568#0" expanded="true" />
+            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="e#1653#1654#0" expanded="true" />
+            <element signature="e#1687#1688#0" expanded="true" />
+            <element signature="e#1747#1748#0" expanded="true" />
+            <element signature="e#1793#1794#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/src/main/java/index/IndexUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/main/java/client/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
