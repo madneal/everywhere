@@ -1,16 +1,25 @@
 package file;
 
-import com.sun.rowset.internal.Row;
+import com.monitorjbl.xlsx.StreamingReader;
 import constants.CommonConstant;
-import javafx.scene.control.Cell;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.openxml4j.exceptions.OLE2NotOfficeXmlFileException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class FileUtil {
 
@@ -29,10 +38,10 @@ public class FileUtil {
 
                 }
             }
-            return fileBeans;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return fileBeans;
     }
 
     private static void fileBeansAddForDirectory(List<FileBean> fileBeans, File file) throws Exception {
@@ -109,9 +118,10 @@ public class FileUtil {
                     }
                 }
             }
+
             wb.close();
         } catch (OLE2NotOfficeXmlFileException e) {
-            logger.error(filePath, e);
+            e.printStackTrace();
         } finally {
             if (inp != null) {
                 inp.close();
@@ -151,12 +161,40 @@ public class FileUtil {
                 is.close();
             }
         } catch (OLE2NotOfficeXmlFileException e) {
-            logger.error(filePath, e);
+            e.printStackTrace();
         } finally {
             if (is != null) {
                 is.close();
             }
         }
         return text;
+    }
+
+    private static String readTxt(InputStream is) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        Scanner s = new Scanner(is).useDelimiter("\\A");
+        while (s.hasNext()) {
+            sb.append(s.next());
+        }
+        if (is != null) {
+            is.close();
+        }
+        String str = sb.toString().replace("\n", "");
+        str = str.replace("\r", "\r\n");
+        return str;
+    }
+
+    private static String readPdf(InputStream is) throws Exception {
+        String result;
+        PDDocument doc = PDDocument.load(is);
+        PDFTextStripper stripper = new PDFTextStripper();
+        result = stripper.getText(doc);
+        if(doc!= null) {
+            doc.close();
+        }
+        if (is != null) {
+            is.close();
+        }
+        return result;
     }
 }
