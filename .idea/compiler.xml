@@ -11,9 +11,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="everywhere" target="1.5" />
-      <module name="search" target="1.5" />
-      <module name="ui" target="1.5" />
+      <module name="everywhere" target="1.8" />
+      <module name="search" target="1.8" />
+      <module name="ui" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
