@@ -1,0 +1,7 @@
+# F: FULLSEARCH L：LOCALSEARCH
+searchMethod: F
+excludeFilePathList: [node_modules, $RECYCLE.BIN\\S]
+fileList: [docx, doc, xls, xlsx, pdf, txt]
+compressFileList: [7z, zip, rar]
+# mb
+limitFileSize: 500

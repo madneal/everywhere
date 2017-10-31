@@ -1,11 +1,14 @@
 package client;
 
+import index.IndexUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import setting.ConfigController;
+import setting.ConfigSetting;
 
 import java.io.IOException;
 
@@ -17,10 +20,12 @@ public class Window extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
-
+        this.primaryStage.setTitle("Search Everywhere");
+        ConfigSetting configSetting = ConfigController.readConfig();
+        if (!configSetting.getHasCreateIndex()) {
+            IndexUtil.executeIndex(configSetting.getSearchMethod());
+        }
         initRootLayout();
-
         showPersonOverview();
     }
 

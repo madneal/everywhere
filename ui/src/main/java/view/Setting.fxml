@@ -15,9 +15,9 @@
                      <children>
                         <Group>
                            <children>
-                              <Button layoutX="407.0" layoutY="45.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="488.0" layoutY="45.0" mnemonicParsing="false" text="search" />
                               <Label layoutX="19.0" layoutY="50.0" text="Search field" />
-                              <TextField layoutX="145.0" layoutY="45.0" />
+                              <TextField layoutX="159.0" layoutY="47.0" onContextMenuRequested="#getSearchTextChanged" prefHeight="30.0" prefWidth="271.0" />
                            </children>
                         </Group>
                      </children>
@@ -40,6 +40,7 @@
                               <CheckBox layoutX="82.0" layoutY="102.0" mnemonicParsing="false" text="txt" />
                            </children>
                         </HBox>
+                        <Button layoutX="469.0" layoutY="201.0" mnemonicParsing="false" text="index" />
                      </children>
                   </AnchorPane>
             </content>
