@@ -3,5 +3,5 @@ searchMethod: F
 excludeFilePathList: [node_modules, $RECYCLE.BIN\\S]
 fileList: [docx, doc, xls, xlsx, pdf, txt]
 compressFileList: [7z, zip, rar]
+hasCreateIndex: false
 # mb
-limitFileSize: 500

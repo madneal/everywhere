@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:controller="controller.Controller" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
 <children>
       <TabPane prefHeight="300.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -17,7 +17,7 @@
                            <children>
                               <Button layoutX="488.0" layoutY="45.0" mnemonicParsing="false" text="search" />
                               <Label layoutX="19.0" layoutY="50.0" text="Search field" />
-                              <TextField layoutX="159.0" layoutY="47.0" onContextMenuRequested="#getSearchTextChanged" prefHeight="30.0" prefWidth="271.0" />
+                              <TextField fx:id="searchText" layoutX="159.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" prefHeight="30.0" prefWidth="271.0" />
                            </children>
                         </Group>
                      </children>
