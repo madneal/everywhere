@@ -16,5 +16,5 @@ public class CommonConstants {
     public static String INDEX_FILE_PATH = "index";
     public static String TOTAL_FILE_NUM;
     public static String FULL_SEARCH = "F";
-    public static String INPUT_FILE_PATH;
+    public static String INPUT_FILE_PATH = "test-data";
 }

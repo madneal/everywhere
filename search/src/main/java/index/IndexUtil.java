@@ -22,7 +22,7 @@ public class IndexUtil {
     public static void executeIndex(String searchType) {
         try {
             List<FileBean> fileBeans = new ArrayList<>();
-            if (searchType == CommonConstants.FULL_SEARCH) {
+            if (CommonConstants.FULL_SEARCH.equals(searchType)) {
                 List<String> driverPaths = FileUtil.getDriver();
                 for (String driver : driverPaths) {
                     fileBeans.addAll(FileUtil.getFolderFiles(driver));
@@ -32,10 +32,7 @@ public class IndexUtil {
             }
             int totalCount = fileBeans.size();
             CommonConstants.TOTAL_FILE_NUM = String.valueOf(totalCount);
-            System.out.println(fileBeans.size());
-            System.out.println("开始创建索引");
             BaseIndex.runIndex(fileBeans);
-            System.out.println("所有线程都创建索引完毕");
         } catch (Exception e) {
             e.printStackTrace();
         }
