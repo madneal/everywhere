@@ -1,15 +1,19 @@
 package controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
+import model.SearchResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
-    @FXML
-    private TextField textField;
-
 
     public void getSearchTextChanged(InputMethodEvent event) {
-        System.out.println("txt:" + textField.getText());
+        System.out.println("txt:" + event.getCommitted());
+    }
+
+    public List<SearchResult> getSearchResult() {
+        List<SearchResult> searchResults = new ArrayList<>();
+        return searchResults;
     }
 }

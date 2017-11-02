@@ -1,6 +1,5 @@
 package client;
 
-import index.IndexUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,15 +15,13 @@ public class Window extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private ConfigSetting configSetting;
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Search Everywhere");
-        ConfigSetting configSetting = ConfigController.readConfig();
-        if (!configSetting.getHasCreateIndex()) {
-            IndexUtil.executeIndex(configSetting.getSearchMethod());
-        }
+        configSetting = ConfigController.readConfig();
         initRootLayout();
         showPersonOverview();
     }
@@ -43,6 +40,9 @@ public class Window extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+//            if (!configSetting.getHasCreateIndex()) {
+//                IndexUtil.executeIndex(configSetting.getSearchMethod());
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
