@@ -1,5 +1,6 @@
 package client;
 
+import index.IndexUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,9 +41,9 @@ public class Window extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-//            if (!configSetting.getHasCreateIndex()) {
-//                IndexUtil.executeIndex(configSetting.getSearchMethod());
-//            }
+            if (!configSetting.getHasCreateIndex()) {
+                IndexUtil.executeIndex(configSetting.getSearchMethod());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
