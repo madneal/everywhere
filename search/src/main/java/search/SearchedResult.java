@@ -1,4 +1,4 @@
-package model;
+package search;
 
 public class SearchedResult {
 
