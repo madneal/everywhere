@@ -41,9 +41,6 @@ public class Window extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-            if (!configSetting.getHasCreateIndex()) {
-                IndexUtil.executeIndex(configSetting.getSearchMethod());
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,6 +58,11 @@ public class Window extends Application {
 
             // Set person overview into the center of root layout.
             rootLayout.setCenter(settingView);
+            if (!configSetting.getHasCreateIndex()) {
+                IndexUtil.executeIndex(configSetting.getSearchMethod());
+                configSetting.setHasCreateIndex(true);
+                ConfigController.writeConfigToYaml(configSetting);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

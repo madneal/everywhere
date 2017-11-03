@@ -1,7 +1,6 @@
-# F: FULLSEARCH L：LOCALSEARCH
-searchMethod: F
+!!setting.ConfigSetting
+compressFileList: [7z, zip, rar]
 excludeFilePathList: [node_modules, $RECYCLE.BIN\\S]
 fileList: [docx, doc, xls, xlsx, pdf, txt]
-compressFileList: [7z, zip, rar]
-hasCreateIndex: false
-# mb
+hasCreateIndex: true
+searchMethod: F
