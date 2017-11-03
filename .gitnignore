@@ -1,5 +1,2 @@
-*/target
-out/*
-target/*
-out
-target
+target/
+out/

@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9a57a7b-314d-459a-af04-528f3be8bfa8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ui/model/SearchResult.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ui/src/main/java/model/SearchedResult.java" afterPath="$PROJECT_DIR$/search/src/main/java/search/SearchedResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ui/controller/Controller.class" afterPath="$PROJECT_DIR$/out/production/ui/controller/Controller.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitnignore" afterPath="$PROJECT_DIR$/.gitnignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/search.iml" afterPath="$PROJECT_DIR$/search/search.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search/src/main/java/search/SearchUtil.java" afterPath="$PROJECT_DIR$/search/src/main/java/search/SearchUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/main/java/controller/Controller.java" afterPath="$PROJECT_DIR$/ui/src/main/java/controller/Controller.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,7 +27,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Window.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Window.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/src/main/java/client/Window.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
@@ -40,6 +35,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitnignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitnignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -183,7 +188,6 @@
         <option value="$PROJECT_DIR$/search/src/main/java/index/IndexUtil.java" />
         <option value="$PROJECT_DIR$/search/src/main/java/constants/CommonConstants.java" />
         <option value="$PROJECT_DIR$/ui/src/main/java/model/SearchResult.java" />
-        <option value="$PROJECT_DIR$/.gitnignore" />
         <option value="$PROJECT_DIR$/ui/src/main/java/client/Window.java" />
         <option value="$PROJECT_DIR$/config.yaml" />
         <option value="$PROJECT_DIR$/search/src/main/java/file/FileUtil.java" />
@@ -191,6 +195,7 @@
         <option value="$PROJECT_DIR$/search/src/main/java/search/SearchUtil.java" />
         <option value="$PROJECT_DIR$/search/src/main/java/search/SearchedResult.java" />
         <option value="$PROJECT_DIR$/ui/src/main/java/controller/Controller.java" />
+        <option value="$PROJECT_DIR$/.gitnignore" />
       </list>
     </option>
   </component>
@@ -486,12 +491,12 @@
       <workItem from="1509604294812" duration="600000" />
       <workItem from="1509667798202" duration="838000" />
       <workItem from="1509681327731" duration="2823000" />
-      <workItem from="1509685158316" duration="2140000" />
+      <workItem from="1509685158316" duration="2290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38675000" />
+    <option name="totallyTimeSpent" value="38825000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -869,13 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitnignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/src/main/java/view/Setting.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -972,6 +970,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitnignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
