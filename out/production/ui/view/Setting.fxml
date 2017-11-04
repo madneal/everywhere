@@ -15,11 +15,16 @@
                      <children>
                         <Group>
                            <children>
-                              <Button layoutX="488.0" layoutY="45.0" mnemonicParsing="false" text="search" />
                               <Label layoutX="19.0" layoutY="50.0" text="Search field" />
-                              <TextField fx:id="searchText" layoutX="159.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" prefHeight="30.0" prefWidth="271.0" />
+                              <TextField fx:id="searchTextId" layoutX="159.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" onKeyTyped="#getKeyTyped" prefHeight="30.0" prefWidth="271.0" />
                            </children>
                         </Group>
+                        <TreeTableView layoutY="93.0" prefHeight="200.0" prefWidth="600.0">
+                          <columns>
+                            <TreeTableColumn id="filepath" prefWidth="306.0" text="filepath" />
+                            <TreeTableColumn id="context" prefWidth="293.0" text="context" />
+                          </columns>
+                        </TreeTableView>
                      </children>
                   </AnchorPane>
             </content>

@@ -23,7 +23,10 @@ public class SearchUtil {
     private static IndexSearcher searcher;
 
     public static IndexSearcher getSearcher(String indexPath) throws IOException {
-        DirectoryReader reader = DirectoryReader.open(IndexUtil.getIndexWriter(indexPath, false));
+        if (CommonConstants.writer == null) {
+            CommonConstants.writer = IndexUtil.getIndexWriter(CommonConstants.INDEX_FILE_PATH, false);
+        }
+        DirectoryReader reader = DirectoryReader.open(CommonConstants.writer);
         return new IndexSearcher(reader);
     }
 
