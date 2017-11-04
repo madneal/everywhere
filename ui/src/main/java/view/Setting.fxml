@@ -13,18 +13,18 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Group>
+                        <Group layoutX="10.0" layoutY="10.0">
                            <children>
                               <Label layoutX="19.0" layoutY="50.0" text="Search field" />
                               <TextField fx:id="searchTextId" layoutX="159.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" onKeyTyped="#getKeyTyped" prefHeight="30.0" prefWidth="271.0" />
                            </children>
                         </Group>
-                        <TreeTableView layoutY="93.0" prefHeight="200.0" prefWidth="600.0">
+                        <TableView fx:id="tableview" layoutY="87.0" prefHeight="178.0" prefWidth="600.0">
                           <columns>
-                            <TreeTableColumn id="filepath" prefWidth="306.0" text="filepath" />
-                            <TreeTableColumn id="context" prefWidth="293.0" text="context" />
+                            <TableColumn fx:id="filepathCol" prefWidth="288.0" text="filepath" />
+                            <TableColumn fx:id="contextCol" prefWidth="311.0" text="context" />
                           </columns>
-                        </TreeTableView>
+                        </TableView>
                      </children>
                   </AnchorPane>
             </content>
