@@ -93,7 +93,7 @@ public class SearchUtil {
                 SearchedResult searchedResult = new SearchedResult();
                 Document document = documentList.get(i);
                 searchedResult.setContext(contextList.get(i));
-                searchedResult.setFilepath(document.get(LuceneConstants.FILE_PATH));
+                searchedResult.setFilepath(document.get(LuceneConstants.PATH));
                 searchedResult.setLastModified(document.get(LuceneConstants.MODIFIED));
                 searchResults.add(searchedResult);
             }

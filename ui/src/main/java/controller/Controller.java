@@ -60,15 +60,18 @@ public class Controller {
     private List<SearchedResult> getSearchResult(String searchText) {
         List<SearchedResult> searchedResults = SearchUtil.executeSearch(searchText, LuceneConstants.CONTENT);
         return searchedResults;
+
     }
 
     private void showTableData(List<SearchedResult> searchedResults) {
         ObservableList<SearchedResult> list = FXCollections.observableArrayList();
-        for (SearchedResult searchedResult: searchedResults) {
-            filepathCol.setCellValueFactory(new PropertyValueFactory("filepath"));
-            contextCol.setCellValueFactory(new PropertyValueFactory("context"));
-            list.add(searchedResult);
+        if (searchedResults != null) {
+            for (SearchedResult searchedResult: searchedResults) {
+                filepathCol.setCellValueFactory(new PropertyValueFactory("filepath"));
+                contextCol.setCellValueFactory(new PropertyValueFactory("context"));
+                list.add(searchedResult);
+            }
+            tableView.setItems(list);
         }
-        tableView.setItems(list);
     }
 }
