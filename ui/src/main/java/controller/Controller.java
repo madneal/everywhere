@@ -22,22 +22,20 @@ public class Controller {
     public TextField searchTextId;
 
     @FXML
-    public TableView tableView;
+    private TableView tview;
 
     @FXML
-    private TableColumn filepathCol;
+    private TableColumn<SearchedResult, String> filepathCol;
 
     @FXML
-    private TableColumn contextCol;
+    private TableColumn<SearchedResult, String> contextCol;
 
     String searchText = "";
 
     public void getSearchTextChanged(InputMethodEvent event) {
         Platform.isSupported(ConditionalFeature.INPUT_METHOD);
-        System.out.println("input" + event.getEventType());
         if (!event.getCommitted().isEmpty()) {
             searchText += event.getCommitted();
-            System.out.println(searchTextId);
             searchTextId.setText(searchText);
             searchTextId.end();
             List<SearchedResult> searchedResults = getSearchResult(searchText);
@@ -63,15 +61,19 @@ public class Controller {
 
     }
 
+
     private void showTableData(List<SearchedResult> searchedResults) {
         ObservableList<SearchedResult> list = FXCollections.observableArrayList();
-        if (searchedResults != null) {
+        if (searchedResults != null && searchedResults.size() != 0) {
             for (SearchedResult searchedResult: searchedResults) {
-                filepathCol.setCellValueFactory(new PropertyValueFactory("filepath"));
-                contextCol.setCellValueFactory(new PropertyValueFactory("context"));
-                list.add(searchedResult);
+                SearchedResult result = new SearchedResult();
+                result.setContext(searchedResult.getContext());
+                result.setFilepath(searchedResult.getFilepath());
+                filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("filepath"));
+                contextCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("context"));
+                list.add(result);
             }
-            tableView.setItems(list);
+            tview.setItems(list);
         }
     }
 }

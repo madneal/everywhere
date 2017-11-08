@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
 <children>
       <TabPane prefHeight="300.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -15,14 +15,13 @@
                      <children>
                         <Group layoutX="10.0" layoutY="10.0">
                            <children>
-                              <Label layoutX="19.0" layoutY="50.0" text="Search field" />
-                              <TextField fx:id="searchTextId" layoutX="159.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" onKeyTyped="#getKeyTyped" prefHeight="30.0" prefWidth="271.0" />
+                              <TextField fx:id="searchTextId" layoutX="245.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" onKeyTyped="#getKeyTyped" prefHeight="30.0" prefWidth="500.0" />
                            </children>
                         </Group>
-                        <TableView fx:id="tableview" layoutY="87.0" prefHeight="178.0" prefWidth="600.0">
+                        <TableView fx:id="tview" layoutX="50.0" layoutY="100.0" prefHeight="800.0" prefWidth="1300.0">
                           <columns>
-                            <TableColumn fx:id="filepathCol" prefWidth="288.0" text="filepath" />
-                            <TableColumn fx:id="contextCol" prefWidth="311.0" text="context" />
+                            <TableColumn fx:id="filepathCol" prefWidth="800.0" text="filepath" />
+                            <TableColumn fx:id="contextCol" prefWidth="500.0" text="context" />
                           </columns>
                         </TableView>
                      </children>
