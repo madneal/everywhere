@@ -4,7 +4,7 @@ import constants.CommonConstants;
 import constants.LuceneConstants;
 import index.IndexUtil;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchUtil {
-    private static Analyzer analyzer = new StandardAnalyzer();
+    private static Analyzer analyzer = new SmartChineseAnalyzer();
     private static IndexSearcher searcher;
 
     public static IndexSearcher getSearcher(String indexPath) throws IOException {

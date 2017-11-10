@@ -11,8 +11,6 @@
     <modules>
         <module>ui</module>
         <module>search</module>
-        <module>ui</module>
-        <module>ui</module>
     </modules>
 
 

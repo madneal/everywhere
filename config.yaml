@@ -2,5 +2,5 @@
 compressFileList: [7z, zip, rar]
 excludeFilePathList: [node_modules, $RECYCLE.BIN\\S]
 fileList: [docx, doc, xls, xlsx, pdf, txt]
-hasCreateIndex: true
+hasCreateIndex: false
 searchMethod: F

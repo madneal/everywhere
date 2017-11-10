@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<children>
+      <TabPane id="mainTabl" prefHeight="300.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Main window">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Group layoutX="10.0" layoutY="10.0">
+                           <children>
+                              <TextField fx:id="searchTextId" layoutX="245.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" onKeyTyped="#getKeyTyped" prefHeight="30.0" prefWidth="500.0" />
+                           </children>
+                        </Group>
+                        <TableView fx:id="tview" layoutX="50.0" layoutY="100.0" prefHeight="800.0" prefWidth="1300.0">
+                          <columns>
+                            <TableColumn fx:id="filepathCol" prefWidth="800.0" text="filepath" />
+                            <TableColumn fx:id="contextCol" prefWidth="500.0" text="context" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Setting">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="381.0">
+                     <children>
+                        <RadioButton layoutX="36.0" layoutY="14.0" mnemonicParsing="false" text="full search" />
+                        <RadioButton layoutX="216.0" layoutY="14.0" mnemonicParsing="false" text="custom search" />
+                        <HBox layoutX="39.0" layoutY="52.0" spacing="30.0">
+                           <children>
+                              <CheckBox layoutX="32.0" layoutY="52.0" mnemonicParsing="false" text="doc" />
+                              <CheckBox layoutX="42.0" layoutY="62.0" mnemonicParsing="false" text="docx" />
+                              <CheckBox layoutX="52.0" layoutY="72.0" mnemonicParsing="false" text="xls" />
+                              <CheckBox layoutX="62.0" layoutY="82.0" mnemonicParsing="false" text="xlsx" />
+                              <CheckBox layoutX="72.0" layoutY="92.0" mnemonicParsing="false" text="xls" />
+                              <CheckBox layoutX="82.0" layoutY="102.0" mnemonicParsing="false" text="txt" />
+                           </children>
+                        </HBox>
+                        <Button layoutX="469.0" layoutY="201.0" mnemonicParsing="false" onAction="#runIndex" text="index" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+</children></AnchorPane>

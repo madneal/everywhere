@@ -5,6 +5,7 @@ import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,6 +15,8 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import search.SearchUtil;
 import search.SearchedResult;
+import setting.ConfigController;
+import setting.ConfigSetting;
 
 import java.util.List;
 
@@ -32,12 +35,25 @@ public class Controller {
 
     String searchText = "";
 
+    public void runIndex(ActionEvent e) {
+        executeIndex();
+    }
+
+    private void executeIndex() {
+        ConfigSetting configSetting = ConfigController.readConfig();
+        if (configSetting.getHasCreateIndex() == false) {
+            configSetting.setHasCreateIndex(true);
+        }
+        ConfigController.writeConfigToYaml(configSetting);
+    }
+
     public void getSearchTextChanged(InputMethodEvent event) {
         Platform.isSupported(ConditionalFeature.INPUT_METHOD);
         if (!event.getCommitted().isEmpty()) {
             searchText += event.getCommitted();
             searchTextId.setText(searchText);
             searchTextId.end();
+            System.out.println(searchText);
             List<SearchedResult> searchedResults = getSearchResult(searchText);
             showTableData(searchedResults);
         }
@@ -51,6 +67,7 @@ public class Controller {
                searchText += keyEvent.getCharacter();
             }
         }
+        System.out.println(searchText);
         List<SearchedResult> searchedResults = getSearchResult(searchText);
         showTableData(searchedResults);
     }
