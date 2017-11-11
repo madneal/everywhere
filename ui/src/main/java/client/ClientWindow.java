@@ -4,6 +4,8 @@ import constants.CommonConstants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -18,14 +20,15 @@ public class ClientWindow extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private TabPane mainTab;
+    private SingleSelectionModel<Tab> selectionModel;
 
     @Override
     public void start(Stage primaryStage) {
+        selectionModel = mainTab.getSelectionModel();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Search Everywhere");
         initRootLayout();
-        showPersonOverview();
-//        SingleSelectionModel<Tab> selectionModel = mainTab.getSelectionModel();
+        showMainTab();
 //        selectionModel.select(0);
     }
 
@@ -34,7 +37,6 @@ public class ClientWindow extends Application {
      */
     public void initRootLayout() {
         try {
-            // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getURL(CommonConstants.ROOT_LAYOUT_PATH));
             rootLayout = (BorderPane) loader.load();
@@ -48,12 +50,8 @@ public class ClientWindow extends Application {
         }
     }
 
-    /**
-     * Shows the person overview inside the root layout.
-     */
-    public void showPersonOverview() {
+    public void showMainTab() {
         try {
-            // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getURL(CommonConstants.SETTING_PATH));
             AnchorPane settingView = (AnchorPane) loader.load();
@@ -61,14 +59,6 @@ public class ClientWindow extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Returns the main stage.
-     * @return
-     */
-    public Stage getPrimaryStage() {
-        return primaryStage;
     }
 
     public static void main(String[] args) {
