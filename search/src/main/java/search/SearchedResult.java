@@ -1,5 +1,7 @@
 package search;
 
+import javafx.scene.control.Hyperlink;
+
 public class SearchedResult {
 
     private String filepath;
@@ -7,6 +9,8 @@ public class SearchedResult {
     private String lastModified;
 
     private String context;
+
+    private Hyperlink hyperlink;
 
     public String getFilepath() {
         return filepath;
@@ -30,5 +34,13 @@ public class SearchedResult {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public Hyperlink getHyperlink() {
+        return hyperlink;
+    }
+
+    public void setHyperlink(Hyperlink hyperlink) {
+        this.hyperlink = hyperlink;
     }
 }

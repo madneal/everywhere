@@ -87,8 +87,9 @@ public class Controller {
                 SearchedResult result = new SearchedResult();
                 result.setContext(searchedResult.getContext());
                 result.setFilepath(searchedResult.getFilepath());
-                Hyperlink hyperlink = new Hyperlink(result.getFilepath());
-                filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("filepath"));
+                result.setHyperlink(new Hyperlink(result.getFilepath()));
+                Hyperlink hyperlink = new Hyperlink("file:\\" + result.getFilepath());
+                filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("hyperlink"));
                 contextCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("context"));
                 list.add(result);
             }
