@@ -24,12 +24,10 @@ public class ClientWindow extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        selectionModel = mainTab.getSelectionModel();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Search Everywhere");
         initRootLayout();
         showMainTab();
-//        selectionModel.select(0);
     }
 
     /**

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -86,6 +87,7 @@ public class Controller {
                 SearchedResult result = new SearchedResult();
                 result.setContext(searchedResult.getContext());
                 result.setFilepath(searchedResult.getFilepath());
+                Hyperlink hyperlink = new Hyperlink(result.getFilepath());
                 filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("filepath"));
                 contextCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("context"));
                 list.add(result);
