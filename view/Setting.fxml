@@ -18,7 +18,7 @@
                               <TextField fx:id="searchTextId" layoutX="245.0" layoutY="47.0" onInputMethodTextChanged="#getSearchTextChanged" onKeyTyped="#getKeyTyped" prefHeight="30.0" prefWidth="500.0" />
                            </children>
                         </Group>
-                        <TableView fx:id="tview" layoutX="50.0" layoutY="100.0" prefHeight="800.0" prefWidth="1300.0">
+                        <TableView fx:id="tview" layoutX="50.0" layoutY="100.0" onMouseClicked="#clickTable" prefHeight="800.0" prefWidth="1300.0">
                           <columns>
                             <TableColumn fx:id="filepathCol" prefWidth="800.0" text="filepath" />
                             <TableColumn fx:id="contextCol" prefWidth="500.0" text="context" />

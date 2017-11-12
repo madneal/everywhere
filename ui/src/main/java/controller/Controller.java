@@ -2,6 +2,7 @@ package controller;
 
 import constants.LuceneConstants;
 import javafx.application.ConditionalFeature;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import search.SearchUtil;
 import search.SearchedResult;
 import setting.ConfigController;
@@ -33,6 +35,8 @@ public class Controller {
 
     @FXML
     private TableColumn<SearchedResult, String> contextCol;
+
+    private HostServices hostServices;
 
     String searchText = "";
 
@@ -79,7 +83,6 @@ public class Controller {
 
     }
 
-
     private void showTableData(List<SearchedResult> searchedResults) {
         ObservableList<SearchedResult> list = FXCollections.observableArrayList();
         if (searchedResults != null && searchedResults.size() != 0) {
@@ -88,12 +91,20 @@ public class Controller {
                 result.setContext(searchedResult.getContext());
                 result.setFilepath(searchedResult.getFilepath());
                 result.setHyperlink(new Hyperlink(result.getFilepath()));
-                Hyperlink hyperlink = new Hyperlink("file:\\" + result.getFilepath());
                 filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("hyperlink"));
                 contextCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("context"));
                 list.add(result);
             }
             tview.setItems(list);
         }
+    }
+
+    @FXML
+    private void clickTable(MouseEvent event) {
+        System.out.println(event);
+    }
+
+    private void open(String link) {
+        hostServices.showDocument(link);
     }
 }
