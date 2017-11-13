@@ -65,7 +65,7 @@ public class Controller {
     }
 
     public void getKeyTyped(KeyEvent keyEvent) {
-        if (keyEvent.getCharacter() == "\b") {
+        if ("\b".equals(keyEvent.getCharacter())) {
             searchText = searchText.substring(0, searchText.length() - 1);
         } else {
             if (!keyEvent.getCharacter().contains("\\")) {
@@ -73,6 +73,8 @@ public class Controller {
             }
         }
         System.out.println(searchText);
+        searchTextId.setText(searchText);
+        searchTextId.end();
         List<SearchedResult> searchedResults = getSearchResult(searchText);
         showTableData(searchedResults);
     }
