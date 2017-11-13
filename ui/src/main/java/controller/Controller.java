@@ -65,7 +65,7 @@ public class Controller {
     }
 
     public void getKeyTyped(KeyEvent keyEvent) {
-        if ("\b".equals(keyEvent.getCharacter())) {
+        if ("\b".equals(keyEvent.getCharacter()) && !searchText.isEmpty()) {
             searchText = searchText.substring(0, searchText.length() - 1);
         } else {
             if (!keyEvent.getCharacter().contains("\\")) {

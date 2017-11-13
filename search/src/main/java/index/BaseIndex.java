@@ -7,15 +7,11 @@ import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.util.List;
 
 public class BaseIndex {
 
-    private static final Logger logger = LoggerFactory.getLogger(BaseIndex.class);
     private static void indexDocs(IndexWriter writer, List<FileBean> t) throws Exception{
         for (FileBean t2 : t) {
             indexDoc(writer, t2);
@@ -42,7 +38,7 @@ public class BaseIndex {
             CommonConstants.writer = IndexUtil.getIndexWriter(CommonConstants.INDEX_FILE_PATH, false);
             indexDocs(CommonConstants.writer, list);
         } catch (IOException e) {
-            logger.error("exception in runIndex:", e);
+            e.printStackTrace();
         } finally {
             try {
                 CommonConstants.writer.commit();
