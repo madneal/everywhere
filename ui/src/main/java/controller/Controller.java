@@ -1,5 +1,6 @@
 package controller;
 
+import client.ClientWindow;
 import constants.LuceneConstants;
 import javafx.application.ConditionalFeature;
 import javafx.application.HostServices;
@@ -15,6 +16,7 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import search.SearchUtil;
 import search.SearchedResult;
@@ -100,12 +102,14 @@ public class Controller {
                     public TableCell<SearchedResult, String> call(TableColumn<SearchedResult, String> col) {
                         final TableCell<SearchedResult, String> cell = new TableCell<>();
                         cell.textProperty().bind(cell.itemProperty()); // in general might need to subclass TableCell and override updateItem(...) here
+                        cell.setTextFill(Color.BLUE);
                         cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (event.getButton() == MouseButton.PRIMARY) {
-                                    System.out.println(event);
-                                    System.out.println(cell.getText());
+                                    cell.setTextFill(Color.GRAY);
+                                    ClientWindow clientWindow = new ClientWindow();
+                                    clientWindow.getHostServices().showDocument(cell.getText());
                                     // handle right click on cell...
                                     // access cell data with cell.getItem();
                                     // access row data with (Person)cell.getTableRow().getItem();
@@ -127,20 +131,4 @@ public class Controller {
         }
     }
 
-    @FXML
-    private void clickTable(MouseEvent event) {
-
-//        System.out.println(filepathCol.getCellData(0));
-//        TableCell c = (TableCell) event.getSource();
-//        System.out.println(c.getText());
-//        TableColumn tableColumn = (TableColumn) event.getTarget();
-//        String cell = tableColumn.getText();
-//        System.out.println(event.getTarget());
-//        System.out.println(event.getPickResult().toString());
-//        System.out.println(event);
-    }
-
-    private void open(String link) {
-        hostServices.showDocument(link);
-    }
 }
