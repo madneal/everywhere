@@ -7,15 +7,15 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import search.SearchUtil;
 import search.SearchedResult;
 import setting.ConfigController;
@@ -90,10 +90,36 @@ public class Controller {
         if (searchedResults != null && searchedResults.size() != 0) {
             for (SearchedResult searchedResult: searchedResults) {
                 SearchedResult result = new SearchedResult();
+                Hyperlink hyperlink = new Hyperlink(result.getFilepath());
                 result.setContext(searchedResult.getContext());
                 result.setFilepath(searchedResult.getFilepath());
                 result.setHyperlink(new Hyperlink(result.getFilepath()));
-                filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("hyperlink"));
+                searchedResult.setHyperlink(hyperlink);
+                filepathCol.setCellFactory(new Callback<TableColumn<SearchedResult, String>, TableCell<SearchedResult, String>>() {
+                    @Override
+                    public TableCell<SearchedResult, String> call(TableColumn<SearchedResult, String> col) {
+                        final TableCell<SearchedResult, String> cell = new TableCell<>();
+                        cell.textProperty().bind(cell.itemProperty()); // in general might need to subclass TableCell and override updateItem(...) here
+                        cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (event.getButton() == MouseButton.PRIMARY) {
+                                    System.out.println(event);
+                                    System.out.println(cell.getText());
+                                    // handle right click on cell...
+                                    // access cell data with cell.getItem();
+                                    // access row data with (Person)cell.getTableRow().getItem();
+                                }
+                            }
+                        });
+                        return cell ;
+                    }
+                });
+                filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("filepath"));
+                System.out.println(filepathCol.getCellData(0));
+                filepathCol.setOnEditStart(event -> {
+                    System.out.println(event);
+                });
                 contextCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("context"));
                 list.add(result);
             }
@@ -103,7 +129,15 @@ public class Controller {
 
     @FXML
     private void clickTable(MouseEvent event) {
-        System.out.println(event);
+
+//        System.out.println(filepathCol.getCellData(0));
+//        TableCell c = (TableCell) event.getSource();
+//        System.out.println(c.getText());
+//        TableColumn tableColumn = (TableColumn) event.getTarget();
+//        String cell = tableColumn.getText();
+//        System.out.println(event.getTarget());
+//        System.out.println(event.getPickResult().toString());
+//        System.out.println(event);
     }
 
     private void open(String link) {

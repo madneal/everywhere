@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import search.SearchedResult;
 
-public class HyperlinkCell implements Callback<TableColumn<SearchedResult, Hyperlink>, TableCell<SearchedResult, Hyperlink>> {
+public class HyperlinkCell implements  Callback<TableColumn<SearchedResult, Hyperlink>, TableCell<SearchedResult, Hyperlink>> {
 
     @Override
     public TableCell<SearchedResult, Hyperlink> call(TableColumn<SearchedResult, Hyperlink> arg) {
