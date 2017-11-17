@@ -13,6 +13,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,6 +25,7 @@ import java.util.Scanner;
 
 public class FileUtil {
 
+    final static Logger logger = LoggerFactory.getLogger(FileUtil.class);
     public static List<FileBean> getFolderFiles(String path) {
         List<FileBean> fileBeans = new ArrayList<FileBean>();
         File file = new File(path);
@@ -35,12 +38,13 @@ public class FileUtil {
                 }
             } else {
                 if (CommonConstants.DOCFILES.contains(extName)) {
+//                    logger.error("Scan file" + path);
                     System.out.println("Scan file:" + path);
                     fileBeans.add(getFilebean(file));
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
         return fileBeans;
     }
