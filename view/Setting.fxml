@@ -24,6 +24,7 @@
                             <TableColumn fx:id="contextCol" prefWidth="500.0" text="context" />
                           </columns>
                         </TableView>
+                        <Button fx:id="indexBtn" layoutX="934.0" layoutY="57.0" mnemonicParsing="false" onAction="#runIndex" prefHeight="30.0" prefWidth="120.0" text="Index" />
                      </children>
                   </AnchorPane>
             </content>
@@ -44,7 +45,6 @@
                               <CheckBox layoutX="82.0" layoutY="102.0" mnemonicParsing="false" text="txt" />
                            </children>
                         </HBox>
-                        <Button layoutX="469.0" layoutY="201.0" mnemonicParsing="false" onAction="#runIndex" text="index" />
                      </children>
                   </AnchorPane>
             </content>

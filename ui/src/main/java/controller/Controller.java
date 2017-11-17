@@ -2,8 +2,8 @@ package controller;
 
 import client.ClientWindow;
 import constants.LuceneConstants;
+import index.IndexUtil;
 import javafx.application.ConditionalFeature;
-import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,21 +33,27 @@ public class Controller {
     private TableView tview;
 
     @FXML
+    private Button indexBtn;
+
+    @FXML
     private TableColumn<SearchedResult, String> filepathCol;
 
     @FXML
     private TableColumn<SearchedResult, String> contextCol;
 
-    private HostServices hostServices;
-
     String searchText = "";
 
     public void runIndex(ActionEvent e) {
+        System.out.println(e);
+        indexBtn.setText("indexing");
         executeIndex();
+        indexBtn.setText("index finished!");
+        indexBtn.setText("index");
     }
 
     private void executeIndex() {
         ConfigSetting configSetting = ConfigController.readConfig();
+        IndexUtil.executeIndex(configSetting.getSearchMethod());
         if (configSetting.getHasCreateIndex() == false) {
             configSetting.setHasCreateIndex(true);
         }
