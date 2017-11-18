@@ -11,6 +11,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
@@ -24,9 +25,11 @@ import search.SearchedResult;
 import setting.ConfigController;
 import setting.ConfigSetting;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
     @FXML
     public TextField searchTextId;
 
@@ -35,6 +38,9 @@ public class Controller {
 
     @FXML
     private Button indexBtn;
+
+    @FXML
+    private ComboBox comboType;
 
     @FXML
     private Label indexLabel;
@@ -46,6 +52,14 @@ public class Controller {
     private TableColumn<SearchedResult, String> contextCol;
 
     String searchText = "";
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        comboType.getItems().addAll(
+                    "content",
+                    "filename"
+            );
+    }
 
     public void runIndex(ActionEvent e) {
         Task<Void> task = new Task<Void>() {
