@@ -11,7 +11,7 @@ I wish this tool will perform just like its name!:smirk:
 3. The client window will shows. For the first time, you should click the index button to index files in your PC. Then you can serarch everwhere :punch:
 
 # Main features
-* Index files including: doc, docx, xls, xslx, txt, pdf
+* Indexed files include: doc, docx, xls, xslx, txt, pdf
 * Nearly realtime search after index
 * Now, the search supports Chinese and English words. Maybe the search still need optimization.
 
