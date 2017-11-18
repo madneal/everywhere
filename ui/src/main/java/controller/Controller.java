@@ -81,10 +81,14 @@ public class Controller {
             }
         }
         System.out.println(searchText);
-        searchTextId.setText(searchText);
-        searchTextId.end();
-        List<SearchedResult> searchedResults = getSearchResult(searchText);
-        showTableData(searchedResults);
+//        searchTextId.setText(searchText);
+//        searchTextId.end();
+        if (!searchText.isEmpty()) {
+            List<SearchedResult> searchedResults = getSearchResult(searchText);
+            showTableData(searchedResults);
+        } else {
+            tview.setItems(null);
+        }
     }
 
     private List<SearchedResult> getSearchResult(String searchText) {
@@ -126,10 +130,6 @@ public class Controller {
                     }
                 });
                 filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("filepath"));
-                System.out.println(filepathCol.getCellData(0));
-                filepathCol.setOnEditStart(event -> {
-                    System.out.println(event);
-                });
                 contextCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("context"));
                 list.add(result);
             }
