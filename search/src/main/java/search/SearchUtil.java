@@ -2,19 +2,22 @@ package search;
 
 import constants.CommonConstants;
 import constants.LuceneConstants;
-import index.IndexUtil;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.highlight.*;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +25,9 @@ public class SearchUtil {
     private static Analyzer analyzer = new SmartChineseAnalyzer();
     private static IndexSearcher searcher;
 
-    public static IndexSearcher getSearcher(String indexPath) throws IOException {
-        if (CommonConstants.writer == null) {
-            CommonConstants.writer = IndexUtil.getIndexWriter(CommonConstants.INDEX_FILE_PATH, false);
-        }
-        DirectoryReader reader = DirectoryReader.open(CommonConstants.writer);
+    public static IndexSearcher getSearcher() throws IOException {
+        Directory directory = FSDirectory.open(Paths.get(CommonConstants.INDEX_FILE_PATH));
+        IndexReader reader = DirectoryReader.open(directory);
         return new IndexSearcher(reader);
     }
 
@@ -85,7 +86,7 @@ public class SearchUtil {
         List<SearchedResult> searchResults = new ArrayList<>();
         try {
             Query query = buildQuery(searchText, searchField);
-            searcher = getSearcher(CommonConstants.INDEX_FILE_PATH);
+            searcher = getSearcher();
             TopDocs topDocs = getTopDocs(searcher, query, 10);
             List<Document> documentList = getDocumentListByScoreDocs(topDocs.scoreDocs);
             List<String> contextList = getContextListByDocumentList(documentList, query, searchField);

@@ -34,15 +34,16 @@ public class BaseIndex {
     }
 
     public static void runIndex(List<FileBean> list) throws Exception {
+        IndexWriter writer = null;
         try {
-            CommonConstants.writer = IndexUtil.getIndexWriter(CommonConstants.INDEX_FILE_PATH, false);
-            indexDocs(CommonConstants.writer, list);
+            writer = IndexUtil.getIndexWriter(CommonConstants.INDEX_FILE_PATH, false);
+            indexDocs(writer, list);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                CommonConstants.writer.commit();
-                CommonConstants.writer.close();
+                writer.commit();
+                writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
