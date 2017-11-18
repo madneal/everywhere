@@ -16,9 +16,9 @@ I wish this tool will perform just like its name!:smirk:
 * Now, the search supports Chinese and English words. Maybe the search still need optimization.
 
 ## Main techniques
-* lucene
-* javaFX
-* POI
+* [lucene](https://lucene.apache.org/core/)
+* [javaFX](http://www.oracle.com/technetwork/java/javafx/overview/index.html)
+* [POI](https://poi.apache.org/)
 
 # Licene
 [Apache License 2.0](https://github.com/neal1991/everywhere/blob/master/LICENSE)
