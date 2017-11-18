@@ -25,6 +25,7 @@
                           </columns>
                         </TableView>
                         <Button fx:id="indexBtn" layoutX="934.0" layoutY="57.0" mnemonicParsing="false" onAction="#runIndex" prefHeight="30.0" prefWidth="120.0" text="Index" />
+                        <Label fx:id="indexLabel" layoutX="1174.0" layoutY="62.0" />
                      </children>
                   </AnchorPane>
             </content>

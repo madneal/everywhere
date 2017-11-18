@@ -7,6 +7,7 @@ import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,6 +37,9 @@ public class Controller {
     private Button indexBtn;
 
     @FXML
+    private Label indexLabel;
+
+    @FXML
     private TableColumn<SearchedResult, String> filepathCol;
 
     @FXML
@@ -44,11 +48,21 @@ public class Controller {
     String searchText = "";
 
     public void runIndex(ActionEvent e) {
-        System.out.println(e);
-        indexBtn.setText("indexing");
-        executeIndex();
-        indexBtn.setText("index finished!");
-        indexBtn.setText("index");
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                executeIndex();
+                return null;
+            }
+        };
+        task.setOnRunning(event -> {
+            indexLabel.setText("indexing, please wait.");
+        });
+        task.setOnSucceeded(event -> {
+            indexLabel.setText("index finished!");
+        });
+        new Thread(task).start();
+        indexLabel.setText("");
     }
 
     private void executeIndex() {
