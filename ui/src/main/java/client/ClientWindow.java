@@ -4,9 +4,6 @@ import constants.CommonConstants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -19,8 +16,6 @@ public class ClientWindow extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private TabPane mainTab;
-    private SingleSelectionModel<Tab> selectionModel;
 
     @Override
     public void start(Stage primaryStage) {

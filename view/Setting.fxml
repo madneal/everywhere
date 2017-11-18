@@ -29,26 +29,6 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Setting">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="161.0" prefWidth="381.0">
-                     <children>
-                        <RadioButton layoutX="36.0" layoutY="14.0" mnemonicParsing="false" text="full search" />
-                        <RadioButton layoutX="216.0" layoutY="14.0" mnemonicParsing="false" text="custom search" />
-                        <HBox layoutX="39.0" layoutY="52.0" spacing="30.0">
-                           <children>
-                              <CheckBox layoutX="32.0" layoutY="52.0" mnemonicParsing="false" text="doc" />
-                              <CheckBox layoutX="42.0" layoutY="62.0" mnemonicParsing="false" text="docx" />
-                              <CheckBox layoutX="52.0" layoutY="72.0" mnemonicParsing="false" text="xls" />
-                              <CheckBox layoutX="62.0" layoutY="82.0" mnemonicParsing="false" text="xlsx" />
-                              <CheckBox layoutX="72.0" layoutY="92.0" mnemonicParsing="false" text="xls" />
-                              <CheckBox layoutX="82.0" layoutY="102.0" mnemonicParsing="false" text="txt" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
         </tabs>
       </TabPane>
 </children></AnchorPane>
