@@ -37,9 +37,6 @@ public class Controller implements Initializable {
     private TableView tview;
 
     @FXML
-    private Button indexBtn;
-
-    @FXML
     private ComboBox comboType;
 
     @FXML
@@ -51,13 +48,15 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<SearchedResult, String> contextCol;
 
+    private String searchField = LuceneConstants.CONTENT;
+
     String searchText = "";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         comboType.getItems().addAll(
                     "content",
-                    "filename"
+                    "path"
             );
     }
 
@@ -88,6 +87,13 @@ public class Controller implements Initializable {
         ConfigController.writeConfigToYaml(configSetting);
     }
 
+    // add listener to the searchType change
+    public void getSearchTypeChange(ActionEvent e) {
+        if (!comboType.getValue().equals(searchField)) {
+            searchField = comboType.getValue().toString();
+        }
+    }
+
     public void getSearchTextChanged(InputMethodEvent event) {
         Platform.isSupported(ConditionalFeature.INPUT_METHOD);
         if (!event.getCommitted().isEmpty()) {
@@ -95,7 +101,7 @@ public class Controller implements Initializable {
             searchTextId.setText(searchText);
             searchTextId.end();
             System.out.println(searchText);
-            List<SearchedResult> searchedResults = getSearchResult(searchText);
+            List<SearchedResult> searchedResults = getSearchResult(searchText, searchField);
             showTableData(searchedResults);
         }
     }
@@ -112,15 +118,15 @@ public class Controller implements Initializable {
 //        searchTextId.setText(searchText);
 //        searchTextId.end();
         if (!searchText.isEmpty()) {
-            List<SearchedResult> searchedResults = getSearchResult(searchText);
+            List<SearchedResult> searchedResults = getSearchResult(searchText, searchField);
             showTableData(searchedResults);
         } else {
             tview.setItems(null);
         }
     }
 
-    private List<SearchedResult> getSearchResult(String searchText) {
-        List<SearchedResult> searchedResults = SearchUtil.executeSearch(searchText, LuceneConstants.CONTENT);
+    private List<SearchedResult> getSearchResult(String searchText, String searchField) {
+        List<SearchedResult> searchedResults = SearchUtil.executeSearch(searchText, searchField);
         return searchedResults;
 
     }
@@ -130,11 +136,8 @@ public class Controller implements Initializable {
         if (searchedResults != null && searchedResults.size() != 0) {
             for (SearchedResult searchedResult: searchedResults) {
                 SearchedResult result = new SearchedResult();
-                Hyperlink hyperlink = new Hyperlink(result.getFilepath());
                 result.setContext(searchedResult.getContext());
                 result.setFilepath(searchedResult.getFilepath());
-                result.setHyperlink(new Hyperlink(result.getFilepath()));
-                searchedResult.setHyperlink(hyperlink);
                 filepathCol.setCellFactory(new Callback<TableColumn<SearchedResult, String>, TableCell<SearchedResult, String>>() {
                     @Override
                     public TableCell<SearchedResult, String> call(TableColumn<SearchedResult, String> col) {

@@ -26,7 +26,7 @@
                         </TableView>
                         <Button fx:id="indexBtn" layoutX="934.0" layoutY="50.0" mnemonicParsing="false" onAction="#runIndex" prefHeight="30.0" prefWidth="120.0" text="Index" />
                         <Label fx:id="indexLabel" layoutX="1174.0" layoutY="62.0" />
-                        <ComboBox fx:id="comboType" layoutX="76.0" layoutY="50.0" prefWidth="150.0" promptText="content" />
+                        <ComboBox fx:id="comboType" layoutX="76.0" layoutY="50.0" onAction="#getSearchTypeChange" prefWidth="150.0" promptText="content" />
                      </children>
                   </AnchorPane>
             </content>

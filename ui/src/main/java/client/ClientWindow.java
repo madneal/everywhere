@@ -40,7 +40,7 @@ public class ClientWindow extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.setMaximized(true);
-//            primaryStage.show();
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,8 +52,6 @@ public class ClientWindow extends Application {
             loader.setLocation(getURL(CommonConstants.SETTING_PATH));
             AnchorPane settingView = (AnchorPane) loader.load();
             rootLayout.setCenter(settingView);
-            primaryStage.show();
-//
         } catch (IOException e) {
             e.printStackTrace();
         }
