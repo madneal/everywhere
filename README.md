@@ -8,7 +8,7 @@ I wish this tool will perform just like its name!:smirk:
 # Usage
 1. Download the tool from [**here**](http://ozfo4jjxb.bkt.clouddn.com/app.zip).
 2. Unzip the `app.zip`, and run the `app.exe` in the folder.
-3. The client window will show. For the first time, you should click the index button to index files in your PC(The index time depends on the number and size of your files. In my PC, it is about 5 minutes). Then you can serarch everwhere :punch:
+3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is about 5 minutes). Then you can serarch everwhere :punch:
 
 # Main features
 * Indexed files include: doc, docx, xls, xslx, txt, pdf
