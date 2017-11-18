@@ -1,6 +1,7 @@
 package controller;
 
 import client.ClientWindow;
+import constants.CommonConstants;
 import constants.LuceneConstants;
 import index.IndexUtil;
 import javafx.application.ConditionalFeature;
@@ -80,6 +81,7 @@ public class Controller implements Initializable {
 
     private void executeIndex() {
         ConfigSetting configSetting = ConfigController.readConfig();
+        CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
         IndexUtil.executeIndex(configSetting.getSearchMethod());
         if (configSetting.getHasCreateIndex() == false) {
             configSetting.setHasCreateIndex(true);

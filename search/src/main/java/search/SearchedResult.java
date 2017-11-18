@@ -31,5 +31,5 @@ public class SearchedResult {
     public void setContext(String context) {
         this.context = context;
     }
-    
+
 }
