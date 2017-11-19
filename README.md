@@ -3,7 +3,7 @@ The name is inspired by everything, an awesome tool to search files in your PC. 
 
 I wish this tool will perform just like its name!:smirk:
 
-![](http://okja9ah81.bkt.clouddn.com/paper.gif)
+![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
 # Usage
 1. Download the tool from [**here**](http://ozfo4jjxb.bkt.clouddn.com/app.zip).
