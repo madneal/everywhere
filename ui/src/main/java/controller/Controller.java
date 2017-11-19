@@ -55,6 +55,8 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // only select the current cell
+        tview.getSelectionModel().setCellSelectionEnabled(true);
         comboType.getItems().addAll(
                     "content",
                     "path"
