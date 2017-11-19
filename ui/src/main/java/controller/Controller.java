@@ -1,6 +1,7 @@
 package controller;
 
 import client.ClientWindow;
+import constants.CommonConstants;
 import constants.LuceneConstants;
 import index.IndexUtil;
 import javafx.application.ConditionalFeature;
@@ -11,6 +12,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
@@ -24,9 +26,11 @@ import search.SearchedResult;
 import setting.ConfigController;
 import setting.ConfigSetting;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
     @FXML
     public TextField searchTextId;
 
@@ -34,7 +38,7 @@ public class Controller {
     private TableView tview;
 
     @FXML
-    private Button indexBtn;
+    private ComboBox comboType;
 
     @FXML
     private Label indexLabel;
@@ -45,7 +49,19 @@ public class Controller {
     @FXML
     private TableColumn<SearchedResult, String> contextCol;
 
+    private String searchField = LuceneConstants.CONTENT;
+
     String searchText = "";
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // only select the current cell
+        tview.getSelectionModel().setCellSelectionEnabled(true);
+        comboType.getItems().addAll(
+                    "content",
+                    "path"
+            );
+    }
 
     public void runIndex(ActionEvent e) {
         Task<Void> task = new Task<Void>() {
@@ -67,11 +83,19 @@ public class Controller {
 
     private void executeIndex() {
         ConfigSetting configSetting = ConfigController.readConfig();
+        CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
         IndexUtil.executeIndex(configSetting.getSearchMethod());
         if (configSetting.getHasCreateIndex() == false) {
             configSetting.setHasCreateIndex(true);
         }
         ConfigController.writeConfigToYaml(configSetting);
+    }
+
+    // add listener to the searchType change
+    public void getSearchTypeChange(ActionEvent e) {
+        if (!comboType.getValue().equals(searchField)) {
+            searchField = comboType.getValue().toString();
+        }
     }
 
     public void getSearchTextChanged(InputMethodEvent event) {
@@ -81,7 +105,7 @@ public class Controller {
             searchTextId.setText(searchText);
             searchTextId.end();
             System.out.println(searchText);
-            List<SearchedResult> searchedResults = getSearchResult(searchText);
+            List<SearchedResult> searchedResults = getSearchResult(searchText, searchField);
             showTableData(searchedResults);
         }
     }
@@ -98,15 +122,15 @@ public class Controller {
 //        searchTextId.setText(searchText);
 //        searchTextId.end();
         if (!searchText.isEmpty()) {
-            List<SearchedResult> searchedResults = getSearchResult(searchText);
+            List<SearchedResult> searchedResults = getSearchResult(searchText, searchField);
             showTableData(searchedResults);
         } else {
             tview.setItems(null);
         }
     }
 
-    private List<SearchedResult> getSearchResult(String searchText) {
-        List<SearchedResult> searchedResults = SearchUtil.executeSearch(searchText, LuceneConstants.CONTENT);
+    private List<SearchedResult> getSearchResult(String searchText, String searchField) {
+        List<SearchedResult> searchedResults = SearchUtil.executeSearch(searchText, searchField);
         return searchedResults;
 
     }
@@ -116,11 +140,8 @@ public class Controller {
         if (searchedResults != null && searchedResults.size() != 0) {
             for (SearchedResult searchedResult: searchedResults) {
                 SearchedResult result = new SearchedResult();
-                Hyperlink hyperlink = new Hyperlink(result.getFilepath());
                 result.setContext(searchedResult.getContext());
                 result.setFilepath(searchedResult.getFilepath());
-                result.setHyperlink(new Hyperlink(result.getFilepath()));
-                searchedResult.setHyperlink(hyperlink);
                 filepathCol.setCellFactory(new Callback<TableColumn<SearchedResult, String>, TableCell<SearchedResult, String>>() {
                     @Override
                     public TableCell<SearchedResult, String> call(TableColumn<SearchedResult, String> col) {

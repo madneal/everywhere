@@ -21,7 +21,7 @@ public class BaseIndex {
     private static void indexDoc(IndexWriter writer, FileBean t) throws Exception {
         Document doc = new Document();
         if (t.getContent() != null) {
-            doc.add(new StringField(LuceneConstants.PATH, t.getFilepath(), Field.Store.YES));
+            doc.add(new TextField(LuceneConstants.PATH, t.getFilepath(), Field.Store.YES));
             doc.add(new LongPoint(LuceneConstants.MODIFIED, t.getLastModified()));
             doc.add(new TextField(LuceneConstants.CONTENT, t.getContent(), CommonConstants.IS_OPEN_CONTEXT ? Field.Store.YES : Field.Store.NO));
             System.out.println("added to document:" + t.getFilepath());

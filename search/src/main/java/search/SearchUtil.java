@@ -7,11 +7,9 @@ import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.*;
 import org.apache.lucene.search.highlight.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -38,8 +36,13 @@ public class SearchUtil {
     public static Query buildQuery(String searchText, String searchField) {
         Query query = null;
         try {
-            QueryParser qp = new QueryParser(searchField, analyzer);
-            query = qp.parse(searchText);
+            if (searchField.equals(LuceneConstants.CONTENT)) {
+                QueryParser qp = new QueryParser(searchField, analyzer);
+                query = qp.parse(searchText);
+            } else {
+                Term term = new Term(LuceneConstants.PATH, searchText);
+                query = new TermQuery(term);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,17 +80,12 @@ public class SearchUtil {
         return contextList;
     }
 
-    private static List<SearchedResult> getSearchedResultsByTopDocs(TopDocs topDocs) {
-        List<SearchedResult> searchedResults = new ArrayList<>();
-        return searchedResults;
-    }
-
     public static List<SearchedResult> executeSearch(String searchText, String searchField) {
         List<SearchedResult> searchResults = new ArrayList<>();
         try {
             Query query = buildQuery(searchText, searchField);
             searcher = getSearcher();
-            TopDocs topDocs = getTopDocs(searcher, query, 10);
+            TopDocs topDocs = getTopDocs(searcher, query, 100);
             List<Document> documentList = getDocumentListByScoreDocs(topDocs.scoreDocs);
             List<String> contextList = getContextListByDocumentList(documentList, query, searchField);
             for (int i = 0; i < documentList.size(); i++) {
