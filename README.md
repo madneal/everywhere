@@ -20,5 +20,8 @@ I wish this tool will perform just like its name!:smirk:
 * [javaFX](http://www.oracle.com/technetwork/java/javafx/overview/index.html)
 * [POI](https://poi.apache.org/)
 
+# Advanced setting
+There are some config options in `config.yaml`. It can be used to config some environment for the application. For example, you can config `excludeFilePathList`,  and `fileList`. However, the fileList only includes `doc, docx, xls, xslx, txt,pdf`.
+
 # Licene
 [Apache License 2.0](https://github.com/neal1991/everywhere/blob/master/LICENSE)
