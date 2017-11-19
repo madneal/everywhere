@@ -15,6 +15,10 @@ I wish this tool will perform just like its name!:smirk:
 * Nearly realtime search after index
 * Now, the search supports Chinese and English words. Maybe the search still need optimization.
 
+## Environment requirements
+* The application is based on x64 OS JDK.
+* The JRE version is 1.8. The JRE has been included in the file folder.
+
 ## Main techniques
 * [lucene](https://lucene.apache.org/core/)
 * [javaFX](http://www.oracle.com/technetwork/java/javafx/overview/index.html)
