@@ -29,21 +29,20 @@ public class FileUtil {
     public static List<FileBean> getFolderFiles(String path) {
         List<FileBean> fileBeans = new ArrayList<FileBean>();
         File file = new File(path);
-        String absoluteFilepath = file.getAbsolutePath();
-        String extName = getFileExtension(file);
         try {
             if (file.isDirectory()) {
-                if (isPassExcludePath(absoluteFilepath)) {
+                if (isPassExcludePath(path)) {
                     fileBeansAddForDirectory(fileBeans, file);
                 }
             } else {
+                String extName = getFileExtension(file);
                 if (CommonConstants.DOCFILES.contains(extName)) {
                     System.out.println("Scan file:" + path);
                     fileBeans.add(getFilebean(file));
                 }
             }
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("For filepath:" + path, e);
         }
         return fileBeans;
     }
