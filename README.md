@@ -14,6 +14,7 @@ I wish this tool will perform just like its name!:smirk:
 * Indexed files include: doc, docx, xls, xslx, txt, pdf
 * Nearly realtime search after index
 * Now, the search supports Chinese and English words. Maybe the search still need optimization.
+* There are two search types, including path and content. You can search file content and filepath.
 
 ## Environment requirements
 * The application is based on x64 OS JDK.
