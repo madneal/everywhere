@@ -4,7 +4,6 @@ import constants.CommonConstants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -63,7 +62,7 @@ public class ClientWindow extends Application {
         File file = new File(filepath);
         URL url = null;
         try {
-            url = file.toURL();
+            url = file.toURI().toURL();
         } catch (Exception e) {
             e.printStackTrace();
         }
