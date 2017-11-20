@@ -3,22 +3,35 @@ The name is inspired by everything, an awesome tool to search files in your PC. 
 
 I wish this tool will perform just like its name!:smirk:
 
-![](http://okja9ah81.bkt.clouddn.com/paper.gif)
+![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
-# Usage
-1. Download the tool from [**here**](http://ozfo4jjxb.bkt.clouddn.com/app.zip).
-2. Unzip the `app.zip`, and run the `app.exe` in the folder.
-3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is about 5 minutes). Then you can serarch everwhere :punch:
+## Usage
+1. Download the tool from [**here**](https://github.com/neal1991/everywhere/releases/download/v0.1.1/app.zip).
+2. Unzip the `app.zip`, and run the `everywhere.exe` in the folder.
+3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is less than 5 minutes). Then you can serarch everwhere :punch:
 
-# Main features
+## Build the exe file
+* First, build the `ui` module to a jar.
+* The main Class is `ClientWindow`.
+* JSmooth is utilized to build exe in this case.
+
+## Main features
 * Indexed files include: doc, docx, xls, xslx, txt, pdf
 * Nearly realtime search after index
 * Now, the search supports Chinese and English words. Maybe the search still need optimization.
+* There are two search types, including path and content. You can search file content and filepath.
+
+## Environment requirements
+* The application is based on x64 OS JDK.
+* The JRE version is 1.8. The JRE has been included in the file folder.
 
 ## Main techniques
 * [lucene](https://lucene.apache.org/core/)
 * [javaFX](http://www.oracle.com/technetwork/java/javafx/overview/index.html)
 * [POI](https://poi.apache.org/)
+
+# Advanced setting
+There are some config options in `config.yaml`. It can be used to config some environment for the application. For example, you can config `excludeFilePathList`,  and `fileList`. However, the fileList only includes `doc, docx, xls, xslx, txt,pdf`.
 
 # Licene
 [Apache License 2.0](https://github.com/neal1991/everywhere/blob/master/LICENSE)
