@@ -1,7 +1,5 @@
 package constants;
 
-import org.apache.lucene.index.IndexWriter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,5 +17,4 @@ public class CommonConstants {
     public static String INPUT_FILE_PATH = "test-data";
     public static String ROOT_LAYOUT_PATH = "view/RootLayout.fxml";
     public static String SETTING_PATH = "view/Setting.fxml";
-    public static IndexWriter writer;
 }

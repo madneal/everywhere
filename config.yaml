@@ -1,5 +1,4 @@
 !!setting.ConfigSetting
-compressFileList: [7z, zip, rar]
 excludeFilePathList: [node_modules, $RECYCLE.BIN, Program Files, Windows]
 fileList: [docx, doc, xls, xlsx, pdf, txt]
 hasCreateIndex: true
