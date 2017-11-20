@@ -5,12 +5,17 @@ I wish this tool will perform just like its name!:smirk:
 
 ![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
-# Usage
+## Usage
 1. Download the tool from [**here**](https://github.com/neal1991/everywhere/releases/download/v0.1.1/app.zip).
 2. Unzip the `app.zip`, and run the `everywhere.exe` in the folder.
 3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is less than 5 minutes). Then you can serarch everwhere :punch:
 
-# Main features
+## Build the exe file
+* First, build the `ui` module to a jar.
+* The main Class is `ClientWindow`.
+* JSmooth is utilized to build exe in this case.
+
+## Main features
 * Indexed files include: doc, docx, xls, xslx, txt, pdf
 * Nearly realtime search after index
 * Now, the search supports Chinese and English words. Maybe the search still need optimization.
