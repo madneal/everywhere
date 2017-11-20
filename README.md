@@ -6,7 +6,7 @@ I wish this tool will perform just like its name!:smirk:
 ![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
 # Usage
-1. Download the tool from [**here**](https://pan.baidu.com/s/1qYHo8Pm).
+1. Download the tool from [**here**](https://github.com/neal1991/everywhere/releases/download/v0.1.1/app.zip).
 2. Unzip the `app.zip`, and run the `everywhere.exe` in the folder.
 3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is less than 5 minutes). Then you can serarch everwhere :punch:
 
