@@ -182,9 +182,7 @@ public class FileUtil {
         if (is != null) {
             is.close();
         }
-        String str = sb.toString().replace("\n", "");
-        str = str.replace("\r", "\r\n");
-        return str;
+        return sb.toString();
     }
 
     private static String readPdf(InputStream is) throws Exception {
