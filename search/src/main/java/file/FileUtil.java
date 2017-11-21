@@ -175,7 +175,7 @@ public class FileUtil {
 
     private static String readTxt(InputStream is) throws Exception {
         StringBuilder sb = new StringBuilder();
-        Scanner s = new Scanner(is).useDelimiter("\\A");
+        Scanner s = new Scanner(is);
         while (s.hasNext()) {
             sb.append(s.next());
         }
