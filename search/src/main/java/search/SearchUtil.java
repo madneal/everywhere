@@ -11,6 +11,7 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.highlight.*;
+import org.apache.lucene.search.uhighlight.UnifiedHighlighter;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
@@ -80,6 +81,36 @@ public class SearchUtil {
         return contextList;
     }
 
+    private static List<String> getContextListByTopDocs(Query query, TopDocs topDocs, IndexSearcher searcher) {
+        List<String> contextList = new ArrayList<>();
+        UnifiedHighlighter highlighter = new UnifiedHighlighter(searcher, analyzer);
+        try {
+            String[] fragments = highlighter.highlight(LuceneConstants.CONTENT, query, topDocs);
+            for (String fragment: fragments) {
+                contextList.add(getBestFragment(fragment));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return contextList;
+    }
+
+    private static String getBestFragment(String fragment) throws Exception {
+        int startPosition = fragment.indexOf("<b>");
+        int endPosition = fragment.indexOf("</b>");
+        if (startPosition == -1) {
+            return "未获取查询结果摘要，请到特定文件搜索结果";
+        }
+        if (startPosition > 10) {
+            startPosition -= 10;
+        }
+        if (endPosition + 10 < fragment.length()) {
+            endPosition += 10;
+        }
+        return fragment.substring(startPosition, endPosition);
+
+    }
+
     public static List<SearchedResult> executeSearch(String searchText, String searchField) {
         List<SearchedResult> searchResults = new ArrayList<>();
         try {
@@ -87,7 +118,7 @@ public class SearchUtil {
             searcher = getSearcher();
             TopDocs topDocs = getTopDocs(searcher, query, 100);
             List<Document> documentList = getDocumentListByScoreDocs(topDocs.scoreDocs);
-            List<String> contextList = getContextListByDocumentList(documentList, query, searchField);
+            List<String> contextList = getContextListByTopDocs(query, topDocs, searcher);
             for (int i = 0; i < documentList.size(); i++) {
                 SearchedResult searchedResult = new SearchedResult();
                 Document document = documentList.get(i);
