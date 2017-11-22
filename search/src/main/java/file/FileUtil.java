@@ -175,16 +175,14 @@ public class FileUtil {
 
     private static String readTxt(InputStream is) throws Exception {
         StringBuilder sb = new StringBuilder();
-        Scanner s = new Scanner(is).useDelimiter("\\A");
+        Scanner s = new Scanner(is);
         while (s.hasNext()) {
             sb.append(s.next());
         }
         if (is != null) {
             is.close();
         }
-        String str = sb.toString().replace("\n", "");
-        str = str.replace("\r", "\r\n");
-        return str;
+        return sb.toString();
     }
 
     private static String readPdf(InputStream is) throws Exception {
