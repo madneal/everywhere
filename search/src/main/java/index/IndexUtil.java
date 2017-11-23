@@ -30,7 +30,9 @@ public class IndexUtil {
                     totalCount += runIndexByEachPath(driver);
                 }
             } else {
-                fileBeans = FileUtil.getFolderFiles(CommonConstants.INPUT_FILE_PATH);
+                for (String path: CommonConstants.INPUT_DATA_PATH_LIST) {
+                    totalCount += runIndexByEachPath(path);
+                }
             }
             CommonConstants.TOTAL_FILE_NUM = String.valueOf(totalCount);
             BaseIndex.runIndex(fileBeans);
@@ -45,7 +47,7 @@ public class IndexUtil {
         int totalNum = 0;
         if (files != null) {
             for (String file: files) {
-                file = path + file;
+                file = path + "\\" + file;
                 List<FileBean> fileBeans = new ArrayList<>();
                 fileBeans.addAll(FileUtil.getFolderFiles(file));
                 totalNum += fileBeans.size();

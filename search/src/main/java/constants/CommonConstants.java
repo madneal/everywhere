@@ -1,14 +1,11 @@
 package constants;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CommonConstants {
 
-    public static List<String> DOCFILES = new ArrayList<String>(Arrays.asList(
-            "doc", "docx", "xls", "xlsx", "pdf", "txt"
-    ));
+    public static List<String> DOCFILES;
+    public static List<String> INPUT_DATA_PATH_LIST;
     public static List<String> EXCLUDE_FILE_PATHS;
     public static boolean IS_OPEN_CONTEXT = true;
     public static String INDEX_FILE_PATH = "index";

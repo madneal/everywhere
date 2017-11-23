@@ -84,6 +84,8 @@ public class Controller implements Initializable {
     private void executeIndex() {
         ConfigSetting configSetting = ConfigController.readConfig();
         CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
+        CommonConstants.DOCFILES = configSetting.getFileList();
+        CommonConstants.INPUT_DATA_PATH_LIST = configSetting.getInputDataPath();
         IndexUtil.executeIndex(configSetting.getSearchMethod());
         if (configSetting.getHasCreateIndex() == false) {
             configSetting.setHasCreateIndex(true);

@@ -14,6 +14,8 @@ public class ConfigSetting {
 
     private boolean hasCreateIndex;
 
+    private List<String> inputDataPath;
+
     public String getSearchMethod() {
         return searchMethod;
     }
@@ -52,5 +54,13 @@ public class ConfigSetting {
 
     public void setHasCreateIndex(boolean hasCreateIndex) {
         this.hasCreateIndex = hasCreateIndex;
+    }
+
+    public List<String> getInputDataPath() {
+        return inputDataPath;
+    }
+
+    public void setInputDataPath(List<String> inputDataPath) {
+        this.inputDataPath = inputDataPath;
     }
 }

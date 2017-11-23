@@ -1,6 +1,10 @@
 !!setting.ConfigSetting
+# F: Full search, scan all drivers in your pc; L: Local search, scan the paths you defined in inputDataPath
+searchMethod: F
+# if searchMethod is L, you should config inputDataPath
+inputDataPath:
+  - C:\Users\neal1\project\lucene-test\test-data
 compressFileList: null
 excludeFilePathList: [node_modules, $RECYCLE.BIN, Program Files, Windows]
 fileList: [docx, doc, xls, xlsx, pdf, txt]
 hasCreateIndex: true
-searchMethod: F
