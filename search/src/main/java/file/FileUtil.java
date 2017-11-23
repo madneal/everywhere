@@ -27,7 +27,7 @@ public class FileUtil {
 
     final static Logger logger = LoggerFactory.getLogger(FileUtil.class);
     public static List<FileBean> getFolderFiles(String path) {
-        List<FileBean> fileBeans = new ArrayList<FileBean>();
+        List<FileBean> fileBeans = new ArrayList<>();
         File file = new File(path);
         try {
             if (file.isDirectory()) {

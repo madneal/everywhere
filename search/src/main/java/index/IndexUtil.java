@@ -12,6 +12,7 @@ import org.apache.lucene.index.LogMergePolicy;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,20 +23,36 @@ public class IndexUtil {
     public static void executeIndex(String searchType) {
         try {
             List<FileBean> fileBeans = new ArrayList<>();
+            int totalCount = 0;
             if (CommonConstants.FULL_SEARCH.equals(searchType)) {
                 List<String> driverPaths = FileUtil.getDriver();
                 for (String driver : driverPaths) {
-                    fileBeans.addAll(FileUtil.getFolderFiles(driver));
+                    totalCount += runIndexByEachPath(driver);
                 }
             } else {
                 fileBeans = FileUtil.getFolderFiles(CommonConstants.INPUT_FILE_PATH);
             }
-            int totalCount = fileBeans.size();
             CommonConstants.TOTAL_FILE_NUM = String.valueOf(totalCount);
             BaseIndex.runIndex(fileBeans);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static int runIndexByEachPath(String path) throws Exception {
+        File dir = new File(path);
+        String[] files = dir.list();
+        int totalNum = 0;
+        if (files != null) {
+            for (String file: files) {
+                file = path + file;
+                List<FileBean> fileBeans = new ArrayList<>();
+                fileBeans.addAll(FileUtil.getFolderFiles(file));
+                totalNum += fileBeans.size();
+                BaseIndex.runIndex(fileBeans);
+            }
+        }
+        return totalNum;
     }
 
     public static IndexWriter getIndexWriter(String indexPath, boolean create) throws IOException {
