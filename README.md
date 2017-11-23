@@ -11,7 +11,8 @@ I wish this tool will perform just like its name!:smirk:
 3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is less than 5 minutes). Then you can search everwhere :punch:
 
 ## Build the exe file
-* First, build the `ui` module to a jar.
+* First, build the `ui` module to a jar. If you are using IDEA, you can export the `ui` jar like this:
+[![RHHun.md.png](https://s1.ax1x.com/2017/11/23/RHHun.md.png)](https://imgchr.com/i/RHHun)
 * The main Class is `ClientWindow`.
 * JSmooth is utilized to build exe in this case.
 
