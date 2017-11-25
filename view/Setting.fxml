@@ -18,10 +18,11 @@
                               <TextField fx:id="searchTextId" layoutX="271.0" layoutY="45.0" onInputMethodTextChanged="#getSearchTextChanged" onKeyTyped="#getKeyTyped" prefHeight="30.0" prefWidth="500.0" />
                            </children>
                         </Group>
-                        <TableView fx:id="tview" layoutX="50.0" layoutY="100.0" prefHeight="600.0" prefWidth="1300.0">
+                        <TableView fx:id="tview" layoutX="50.0" layoutY="100.0" prefHeight="600.0" prefWidth="1024.0">
                           <columns>
-                            <TableColumn fx:id="filepathCol" prefWidth="800.0" text="filepath" />
-                            <TableColumn fx:id="contextCol" prefWidth="500.0" text="context" />
+                            <TableColumn fx:id="filepathCol" prefWidth="600.0" text="filepath" />
+                            <TableColumn fx:id="contextCol" prefWidth="212.0" text="context" />
+                              <TableColumn fx:id="lastModifiedCol" prefWidth="212.0" text="lastmodified" />
                           </columns>
                         </TableView>
                         <Button fx:id="indexBtn" layoutX="934.0" layoutY="50.0" mnemonicParsing="false" onAction="#runIndex" prefHeight="30.0" prefWidth="120.0" text="Index" />

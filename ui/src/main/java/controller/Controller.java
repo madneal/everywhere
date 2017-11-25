@@ -3,6 +3,7 @@ package controller;
 import client.ClientWindow;
 import constants.CommonConstants;
 import constants.LuceneConstants;
+import file.FileUtil;
 import index.IndexUtil;
 import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
@@ -49,6 +50,9 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<SearchedResult, String> contextCol;
 
+    @FXML
+    private TableColumn<SearchedResult, String> lastModifiedCol;
+
     private String searchField = LuceneConstants.CONTENT;
 
     String searchText = "";
@@ -86,6 +90,7 @@ public class Controller implements Initializable {
         CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
         CommonConstants.DOCFILES = configSetting.getFileList();
         CommonConstants.INPUT_DATA_PATH_LIST = configSetting.getInputDataPath();
+        FileUtil.deleteFile(CommonConstants.INDEX_FILE_PATH);
         IndexUtil.executeIndex(configSetting.getSearchMethod());
         if (configSetting.getHasCreateIndex() == false) {
             configSetting.setHasCreateIndex(true);
@@ -144,6 +149,7 @@ public class Controller implements Initializable {
                 SearchedResult result = new SearchedResult();
                 result.setContext(searchedResult.getContext());
                 result.setFilepath(searchedResult.getFilepath());
+                result.setLastModified(searchedResult.getLastModified());
                 filepathCol.setCellFactory(new Callback<TableColumn<SearchedResult, String>, TableCell<SearchedResult, String>>() {
                     @Override
                     public TableCell<SearchedResult, String> call(TableColumn<SearchedResult, String> col) {
@@ -168,6 +174,7 @@ public class Controller implements Initializable {
                 });
                 filepathCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("filepath"));
                 contextCol.setCellValueFactory(new PropertyValueFactory<SearchedResult, String>("context"));
+                lastModifiedCol.setCellValueFactory(new PropertyValueFactory<>("lastModified"));
                 list.add(result);
             }
             tview.setItems(list);

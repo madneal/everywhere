@@ -3,10 +3,15 @@ package index;
 import constants.CommonConstants;
 import constants.LuceneConstants;
 import file.FileBean;
-import org.apache.lucene.document.*;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
+import searchutils.UtilsTool;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -22,9 +27,9 @@ public class BaseIndex {
         Document doc = new Document();
         if (t.getContent() != null) {
             doc.add(new TextField(LuceneConstants.PATH, t.getFilepath(), Field.Store.YES));
-            doc.add(new LongPoint(LuceneConstants.MODIFIED, t.getLastModified()));
+            doc.add(new StringField(LuceneConstants.MODIFIED, UtilsTool.getDateStrByLastModified(t.getLastModified()), Field.Store.YES));
             doc.add(new TextField(LuceneConstants.CONTENT, t.getContent(), CommonConstants.IS_OPEN_CONTEXT ? Field.Store.YES : Field.Store.NO));
-            System.out.println("added to document:" + t.getFilepath());
+//            System.out.println("added to document:" + t.getFilepath());
             if (writer.getConfig().getOpenMode() == IndexWriterConfig.OpenMode.CREATE){
                 writer.addDocument(doc);
             } else{
