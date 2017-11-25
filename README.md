@@ -1,4 +1,5 @@
 # everywhere :mag:
+
 The name is inspired by everything, an awesome tool to search files in your PC. But the limitation is it can only search for filename. Recently, I am developing a tool to scan the documents in PC to search for some specific kind of data. A idea hits me that if I can develop a tool where I can search the content of files. It is the creation of this tool.
 
 I wish this tool will perform just like its name!:smirk:
@@ -6,12 +7,13 @@ I wish this tool will perform just like its name!:smirk:
 ![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
 ## Usage
-1. Download the tool from [**here**](https://github.com/neal1991/everywhere/releases/download/v0.1.1/app.zip).
+1. Download the tool from [**here**](https://github.com/neal1991/everywhere/releases/download/v0.1.2/app.zip).
 2. Unzip the `app.zip`, and run the `everywhere.exe` in the folder.
 3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is less than 5 minutes). Then you can search everwhere :punch:
 
 ## Build the exe file
-* First, build the `ui` module to a jar.
+* First, build the `ui` module to a jar. If you are using IDEA, you can export the `ui` jar like this:
+[![RHHun.md.png](https://s1.ax1x.com/2017/11/23/RHHun.md.png)](https://imgchr.com/i/RHHun)
 * The main Class is `ClientWindow`.
 * JSmooth is utilized to build exe in this case.
 
