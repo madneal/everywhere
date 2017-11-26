@@ -6,7 +6,6 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.openxml4j.exceptions.OLE2NotOfficeXmlFileException;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
@@ -102,23 +101,19 @@ public class FileUtil {
     private static String readExcel(String filePath, InputStream inp) throws Exception {
         Workbook wb;
         StringBuilder sb = new StringBuilder();
-        try {
-            if (filePath.endsWith(".xls")) {
-                wb = new HSSFWorkbook(inp);
-            } else {
-                wb = StreamingReader.builder()
-                        .rowCacheSize(1000)    // number of rows to keep in memory (defaults to 10)
-                        .bufferSize(4096)     // buffer size to use when reading InputStream to file (defaults to 1024)
-                        .open(inp);            // InputStream or File for XLSX file (required)
-            }
-            sb = readSheet(wb, sb, filePath.endsWith(".xls"));
-            wb.close();
-        } catch (OLE2NotOfficeXmlFileException e) {
-            e.printStackTrace();
-        } finally {
-            if (inp != null) {
-                inp.close();
-            }
+        boolean isXls = filePath.endsWith("xls");
+        if (isXls) {
+            wb = new HSSFWorkbook(inp);
+        } else {
+            wb = StreamingReader.builder()
+                    .rowCacheSize(1000)    // number of rows to keep in memory (defaults to 10)
+                    .bufferSize(4096)     // buffer size to use when reading InputStream to file (defaults to 1024)
+                    .open(inp);            // InputStream or File for XLSX file (required)
+        }
+        sb = readSheet(wb, sb, isXls);
+        wb.close();
+        if (inp != null) {
+            inp.close();
         }
         return sb.toString();
     }
