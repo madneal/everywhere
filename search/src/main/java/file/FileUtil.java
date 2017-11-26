@@ -7,6 +7,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.openxml4j.exceptions.OLE2NotOfficeXmlFileException;
+import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -150,21 +151,20 @@ public class FileUtil {
 
     private static String readDoc (String filePath, InputStream is) throws Exception {
         String text= "";
+        is = FileMagic.prepareToCheckMagic(is);
         try {
-            if (filePath.endsWith("doc")) {
+            if (FileMagic.valueOf(is) == FileMagic.OLE2) {
                 WordExtractor ex = new WordExtractor(is);
                 text = ex.getText();
                 ex.close();
-                is.close();
-            } else if(filePath.endsWith("docx")) {
+            } else if(FileMagic.valueOf(is) == FileMagic.OOXML) {
                 XWPFDocument doc = new XWPFDocument(is);
                 XWPFWordExtractor extractor = new XWPFWordExtractor(doc);
                 text = extractor.getText();
                 extractor.close();
-                is.close();
             }
-        } catch (OLE2NotOfficeXmlFileException e) {
-            e.printStackTrace();
+        } catch (OfficeXmlFileException e) {
+            logger.error("for file " + filePath, e);
         } finally {
             if (is != null) {
                 is.close();

@@ -1,7 +1,8 @@
 !!setting.ConfigSetting
+searchMethod: L
+inputDataPath:
+  - C:\Users\neal1\Documents\WeChat Files\Cafery\Files
 compressFileList: null
 excludeFilePathList: [node_modules, $RECYCLE.BIN, Program Files, Windows]
 fileList: [docx, doc, xls, xlsx, pdf, txt]
 hasCreateIndex: true
-inputDataPath: ['C:\Users\neal1\project\lucene-test\test-data']
-searchMethod: F

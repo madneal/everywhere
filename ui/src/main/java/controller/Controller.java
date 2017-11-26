@@ -82,7 +82,6 @@ public class Controller implements Initializable {
             indexLabel.setText("index finished!");
         });
         new Thread(task).start();
-        indexLabel.setText("");
     }
 
     private void executeIndex() {
