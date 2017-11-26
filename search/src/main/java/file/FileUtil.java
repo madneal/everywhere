@@ -8,10 +8,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.openxml4j.exceptions.OLE2NotOfficeXmlFileException;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
@@ -114,15 +111,7 @@ public class FileUtil {
                         .bufferSize(4096)     // buffer size to use when reading InputStream to file (defaults to 1024)
                         .open(inp);            // InputStream or File for XLSX file (required)
             }
-            for (Sheet sheet: wb) {
-                for (Row r: sheet) {
-                    for (Cell cell: r) {
-                        sb.append(getValue(cell));
-                        sb.append(" ");
-                    }
-                }
-            }
-
+            sb = readSheet(wb, sb, filePath.endsWith(".xls"));
             wb.close();
         } catch (OLE2NotOfficeXmlFileException e) {
             e.printStackTrace();
@@ -135,18 +124,26 @@ public class FileUtil {
     }
 
     @SuppressWarnings({ "static-access", "deprecation" })
-    private static String getValue(Cell cell) {
-        if (cell.getCellType() == cell.CELL_TYPE_BOOLEAN) {
-            return String.valueOf(cell.getBooleanCellValue());
-        } else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-            return String.valueOf(cell.getNumericCellValue());
-        } else if (cell.getCellType() == cell.CELL_TYPE_FORMULA) {
-            return String.valueOf(cell.getCellFormula());
-        } else if (cell.getCellType() == cell.CELL_TYPE_ERROR) {
-            return String.valueOf(cell.getErrorCellValue());
-        } else {
-            return String.valueOf(cell.getStringCellValue());
+    private static StringBuilder readSheet(Workbook wb, StringBuilder sb, boolean isXls) throws Exception {
+        for (Sheet sheet: wb) {
+            for (Row r: sheet) {
+                for (Cell cell: r) {
+                    if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+                        sb.append(cell.getStringCellValue());
+                        sb.append(" ");
+                    } else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                        if (isXls) {
+                            DataFormatter formatter = new DataFormatter();
+                            sb.append(formatter.formatCellValue(cell));
+                        } else {
+                            sb.append(cell.getStringCellValue());
+                        }
+                        sb.append(" ");
+                    }
+                }
+            }
         }
+        return sb;
     }
 
     private static String readDoc (String filePath, InputStream is) throws Exception {
