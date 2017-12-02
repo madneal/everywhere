@@ -61,12 +61,17 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // only select the current cell
-        tview.getSelectionModel().setCellSelectionEnabled(true);
-        comboType.getItems().addAll(
+        try {
+            tview.getSelectionModel().setCellSelectionEnabled(true);
+            comboType.getItems().addAll(
                     "content",
                     "path"
             );
-        ps = new PrintStream(new Console(console));
+//            Charset utf8 = Charset.forName("UTF-8");
+            ps = new PrintStream(new Console(console), false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void runIndex(ActionEvent e) {
@@ -90,7 +95,6 @@ public class Controller implements Initializable {
         tabPanel.getSelectionModel().select(1);
         System.setOut(ps);
         System.setErr(ps);
-        System.out.println("hello worldr");
         ConfigSetting configSetting = ConfigController.readConfig();
         CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
         CommonConstants.DOCFILES = configSetting.getFileList();
