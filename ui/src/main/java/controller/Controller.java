@@ -131,8 +131,6 @@ public class Controller implements Initializable {
             }
         }
         System.out.println(searchText);
-//        searchTextId.setText(searchText);
-//        searchTextId.end();
         if (!searchText.isEmpty()) {
             List<SearchedResult> searchedResults = getSearchResult(searchText, searchField);
             showTableData(searchedResults);

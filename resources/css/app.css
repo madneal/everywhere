@@ -1,0 +1,7 @@
+.console-textarea .content{
+    /*-fx-text-fill: #ffffff;*/
+    -fx-background-color: black;
+}
+.console-textarea {
+    -fx-text-fill: white;
+}

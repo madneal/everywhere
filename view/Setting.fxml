@@ -36,7 +36,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="console" layoutX="75.0" layoutY="62.0" prefHeight="670.0" prefWidth="884.0" style="-fx-background-color: black;" />
+                        <TextArea fx:id="console" layoutX="75.0" layoutY="62.0" prefHeight="670.0" prefWidth="1024.0" styleClass="console-textarea" stylesheets="@../resources/css/app.css" />
                      </children>
                   </AnchorPane>
               </content>
