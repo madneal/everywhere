@@ -1,6 +1,7 @@
 package controller;
 
 import client.ClientWindow;
+import client.Console;
 import constants.CommonConstants;
 import constants.LuceneConstants;
 import file.FileUtil;
@@ -27,6 +28,7 @@ import search.SearchedResult;
 import setting.ConfigController;
 import setting.ConfigSetting;
 
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,25 +36,24 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     @FXML
     public TextField searchTextId;
-
     @FXML
     private TableView tview;
-
     @FXML
     private ComboBox comboType;
-
     @FXML
     private Label indexLabel;
-
+    @FXML
+    private TextArea console;
+    @FXML
+    private TabPane tabPanel;
     @FXML
     private TableColumn<SearchedResult, String> filepathCol;
-
     @FXML
     private TableColumn<SearchedResult, String> contextCol;
-
     @FXML
     private TableColumn<SearchedResult, String> lastModifiedCol;
 
+    private PrintStream ps;
     private String searchField = LuceneConstants.CONTENT;
 
     String searchText = "";
@@ -65,6 +66,7 @@ public class Controller implements Initializable {
                     "content",
                     "path"
             );
+        ps = new PrintStream(new Console(console));
     }
 
     public void runIndex(ActionEvent e) {
@@ -85,6 +87,10 @@ public class Controller implements Initializable {
     }
 
     private void executeIndex() {
+        tabPanel.getSelectionModel().select(1);
+        System.setOut(ps);
+        System.setErr(ps);
+        System.out.println("hello worldr");
         ConfigSetting configSetting = ConfigController.readConfig();
         CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
         CommonConstants.DOCFILES = configSetting.getFileList();

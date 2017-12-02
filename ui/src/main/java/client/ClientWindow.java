@@ -56,6 +56,9 @@ public class ClientWindow extends Application {
     }
 
     public static void main(String[] args) {
+        // disable apache pdfbox logging warn
+        System.setProperty("org.apache.commons.logging.Log",
+                "org.apache.commons.logging.impl.NoOpLog");
         launch(args);
     }
 

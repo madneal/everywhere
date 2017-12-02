@@ -6,3 +6,4 @@ compressFileList: null
 excludeFilePathList: [node_modules, $RECYCLE.BIN, Program Files, Windows]
 fileList: [docx, doc, xls, xlsx, pdf, txt]
 hasCreateIndex: true
+
