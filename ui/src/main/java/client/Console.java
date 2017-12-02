@@ -29,6 +29,7 @@ public class Console extends OutputStream {
         }
         try {
             console.setText(new String(array, "UTF-8"));
+            console.setScrollTop(Double.MAX_VALUE);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
