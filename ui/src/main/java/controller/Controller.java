@@ -68,7 +68,7 @@ public class Controller implements Initializable {
                     "path"
             );
 //            Charset utf8 = Charset.forName("UTF-8");
-            ps = new PrintStream(new Console(console), false);
+            ps = new PrintStream(new Console(console), true);
         } catch (Exception e) {
             e.printStackTrace();
         }
