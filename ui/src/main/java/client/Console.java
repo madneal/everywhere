@@ -1,6 +1,5 @@
 package client;
 
-import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Console extends OutputStream {
     private TextArea console;
@@ -34,9 +34,11 @@ public class Console extends OutputStream {
             e.printStackTrace();
         }
     }
+
     @Override
     public void write(int i) throws IOException {
-        Platform.runLater(() ->  {
+        Objects.requireNonNull(i, "i");
+        GUIUtils.runSafe(() -> {
             bytes.add((byte)i);
             ps.write(i);
             update();
@@ -45,8 +47,9 @@ public class Console extends OutputStream {
 
     @Override
     public void write(byte[] i) {
-        Platform.runLater(() -> {
-            for (byte b : i) {
+        Objects.requireNonNull(i, "i");
+        GUIUtils.runSafe(() -> {
+            for (byte b: i) {
                 bytes.add(b);
                 ps.write(b);
                 update();
