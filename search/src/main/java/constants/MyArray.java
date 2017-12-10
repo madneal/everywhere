@@ -1,6 +1,7 @@
 package constants;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 public class MyArray<E> {
 
@@ -30,6 +31,15 @@ public class MyArray<E> {
         ensureCapacityInternal(size + 1);
         elementData[size++] = e;
         return true;
+    }
+
+    public boolean addAll(Collection<? extends E> c) {
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        ensureCapacityInternal(size + numNew);
+        System.arraycopy(a, 0, elementData, size, numNew);
+        size += numNew;
+        return numNew != 0;
     }
 
     private void ensureCapacityInternal(int minCapcity) {
