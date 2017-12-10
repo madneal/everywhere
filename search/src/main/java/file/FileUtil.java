@@ -34,7 +34,7 @@ public class FileUtil {
             } else {
                 String extName = getFileExtension(file);
                 if (CommonConstants.DOCFILES.contains(extName)) {
-                    System.out.println("Scan file:" + path);
+//                    System.out.println("Scan file:" + path);
                     fileBeans.add(getFilebean(file));
                 }
             }

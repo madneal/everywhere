@@ -48,6 +48,7 @@ public class IndexUtil {
         if (files != null) {
             for (String file: files) {
                 file = path + "\\" + file;
+                System.out.println("processing " + file);
                 List<FileBean> fileBeans = new ArrayList<>();
                 fileBeans.addAll(FileUtil.getFolderFiles(file));
                 totalNum += fileBeans.size();
