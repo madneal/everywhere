@@ -28,6 +28,7 @@ import search.SearchedResult;
 import setting.ConfigController;
 import setting.ConfigSetting;
 
+import java.io.File;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.List;
@@ -99,7 +100,7 @@ public class Controller implements Initializable {
         CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
         CommonConstants.DOCFILES = configSetting.getFileList();
         CommonConstants.INPUT_DATA_PATH_LIST = configSetting.getInputDataPath();
-        FileUtil.deleteFile(CommonConstants.INDEX_FILE_PATH);
+        FileUtil.deleteFile(new File(CommonConstants.INDEX_FILE_PATH));
         IndexUtil.executeIndex(configSetting.getSearchMethod());
         if (configSetting.getHasCreateIndex() == false) {
             configSetting.setHasCreateIndex(true);
