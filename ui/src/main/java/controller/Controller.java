@@ -139,7 +139,7 @@ public class Controller implements Initializable {
             List<SearchedResult> searchedResults = getSearchResult(searchText, searchField);
             showTableData(searchedResults);
         } else {
-            tview.setItems(null);
+            tview.getItems().clear();
         }
     }
 
