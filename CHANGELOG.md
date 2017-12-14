@@ -1,6 +1,9 @@
 ## Change Log
 
-### v0.1.3 (2017/12/14 19:42 +08:00)
+### v0.1.3 (2017/12/14 20:29 +08:00)
+- [bd48a4c](https://github.com/neal1991/everywhere/commit/bd48a4c3a49c9897afcf77ebe10a801582a13e16) display all results (@neal1991)
+- [a41d0b5](https://github.com/neal1991/everywhere/commit/a41d0b5f04c0a4367e69b7cef003ea4c0b27b5de) clear data when search test is empty :rocket: (@neal1991)
+- [fd3451a](https://github.com/neal1991/everywhere/commit/fd3451a6d900efe718faf2f53ff1d67326f98c72) update changelog :memo: (@neal1991)
 - [3c23626](https://github.com/neal1991/everywhere/commit/3c23626996fbb192fd93e7f015f9e73985ad238b) convert tan after index finished :lipstick: (@neal1991)
 - [667ae57](https://github.com/neal1991/everywhere/commit/667ae57f536c6421a35282dcea84502544357329) remove STDOUT :fire: (@neal1991)
 - [1256f07](https://github.com/neal1991/everywhere/commit/1256f0784d37be7aca08014e43a0eebf4e6da7e3) reduce System.out :zap: (@neal1991)
