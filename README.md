@@ -28,7 +28,7 @@ For detailed changelog, please refer [CHANGELOG](https://github.com/neal1991/eve
 * initial the project
 
 ## Usage
-1. Download the tool from above.
+1. Download the tool from the corresponding tag.
 2. Unzip the `app.zip`, and run the `everywhere.exe` in the folder.
 3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is less than 5 minutes). Then you can search everwhere :punch:
 
