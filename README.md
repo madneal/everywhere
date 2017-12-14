@@ -4,6 +4,7 @@ The name is inspired by everything, an awesome tool to search files in your PC. 
 
 I wish this tool will perform just like its name!:smirk:
 
+![qzsG6.gif](https://s1.ax1x.com/2017/12/14/qzsG6.gif)
 ![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
 # Changelog
