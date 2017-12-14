@@ -67,7 +67,6 @@ public class Controller implements Initializable {
                     "content",
                     "path"
             );
-//            Charset utf8 = Charset.forName("UTF-8");
             ps = new PrintStream(new Console(console), true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,6 +85,7 @@ public class Controller implements Initializable {
             indexLabel.setText("indexing, please wait.");
         });
         task.setOnSucceeded(event -> {
+            tabPanel.getSelectionModel().select(0);
             indexLabel.setText("index finished!");
         });
         new Thread(task).start();
