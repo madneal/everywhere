@@ -116,7 +116,11 @@ public class SearchUtil {
         try {
             Query query = buildQuery(searchText, searchField);
             searcher = getSearcher();
-            TopDocs topDocs = getTopDocs(searcher, query, 100);
+            TopDocs topDocs = getTopDocs(searcher, query, 50);
+            int totalHits = topDocs.totalHits;
+            if (totalHits > 50) {
+                topDocs = getTopDocs(searcher, query, totalHits);
+            }
             List<Document> documentList = getDocumentListByScoreDocs(topDocs.scoreDocs);
             List<String> contextList = getContextListByTopDocs(query, topDocs, searcher);
             for (int i = 0; i < documentList.size(); i++) {
