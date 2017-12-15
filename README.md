@@ -18,12 +18,11 @@ For detailed changelog, please refer [CHANGELOG](https://github.com/neal1991/eve
 
 ### v0.1.2
 * index by each path
-* add some explains in README
-* modify text read metho
+* modify text read method
 
 ### v0.1.1
 * update readme
-* only click the cell instead the whole row
+* only click the cell instead of the whole row
 
 ### v0.1
 * initial the project
