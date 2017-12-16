@@ -200,17 +200,14 @@ public class FileUtil {
         return driverList;
     }
 
-    public static void deleteFile(String path) {
-        File file = new File(path);
-        if (file.exists()) {
-            if (file.isDirectory()) {
-                String[] files = file.list();
-                for (String file1: files) {
-                    deleteFile(file1);
-                }
+    public static void deleteFile(File file) {
+        if (file.isDirectory()) {
+            String[] list = file.list();
+            for (String child : list) {
+                deleteFile(new File(file, child));
             }
-            file.delete();
         }
+        file.delete();
     }
 
 }
