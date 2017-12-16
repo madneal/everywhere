@@ -1,7 +1,9 @@
 package index;
 
 import constants.CommonConstants;
+import constants.MyArray;
 import file.FileBean;
+import file.FileBeanParser;
 import file.FileUtil;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
@@ -36,6 +38,19 @@ public class IndexUtil {
             }
             CommonConstants.TOTAL_FILE_NUM = String.valueOf(totalCount);
             BaseIndex.runIndex(fileBeans);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void indexForFiles(List<String> filepathList) {
+        List<FileBean> fileBeanMyArray = new ArrayList<>(1);
+        try {
+            for (String filepath: filepathList) {
+                File file = new File(filepath);
+                fileBeanMyArray.add(FileBeanParser.getFileBean(file));
+            }
+            BaseIndex.runIndex(fileBeanMyArray);
         } catch (Exception e) {
             e.printStackTrace();
         }
