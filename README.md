@@ -4,10 +4,31 @@ The name is inspired by everything, an awesome tool to search files in your PC. 
 
 I wish this tool will perform just like its name!:smirk:
 
+![qzsG6.gif](https://s1.ax1x.com/2017/12/14/qzsG6.gif)
 ![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
+# Changelog
+For detailed changelog, please refer [CHANGELOG](https://github.com/neal1991/everywhere/blob/master/CHANGELOG.md)
+
+### v0.1.3 [:arrow_down:](https://github.com/neal1991/everywhere/releases/download/v0.1.3/app.zip)
+* display the index process by a console
+* fix cannot tell docx and doc for some files
+* add about buton to see the website
+* clear data when the search text is empty
+
+### v0.1.2
+* index by each path
+* modify text read method
+
+### v0.1.1
+* update readme
+* only click the cell instead of the whole row
+
+### v0.1
+* initial the project
+
 ## Usage
-1. Download the tool from [**here**](https://github.com/neal1991/everywhere/releases/download/v0.1.2/app.zip).
+1. Download the tool from the corresponding tag.
 2. Unzip the `app.zip`, and run the `everywhere.exe` in the folder.
 3. The client window will show. For the first time, you should click the **index button** to index files in your PC(The index time depends on the number and size of your files. In my PC, it is less than 5 minutes). Then you can search everwhere :punch:
 
