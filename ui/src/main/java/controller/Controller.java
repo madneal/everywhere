@@ -82,9 +82,6 @@ public class Controller implements Initializable {
                 return null;
             }
         };
-        task.setOnRunning(event -> {
-            indexLabel.setText("indexing, please wait.");
-        });
         task.setOnSucceeded(event -> {
             tabPanel.getSelectionModel().select(0);
             indexLabel.setText("index finished!");
