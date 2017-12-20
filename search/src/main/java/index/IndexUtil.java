@@ -1,7 +1,6 @@
 package index;
 
 import constants.CommonConstants;
-import constants.MyArray;
 import file.FileBean;
 import file.FileBeanParser;
 import file.FileUtil;
