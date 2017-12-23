@@ -11,6 +11,8 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.highlight.*;
+import org.apache.lucene.search.uhighlight.DefaultPassageFormatter;
+import org.apache.lucene.search.uhighlight.PassageFormatter;
 import org.apache.lucene.search.uhighlight.UnifiedHighlighter;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -84,6 +86,8 @@ public class SearchUtil {
     private static List<String> getContextListByTopDocs(Query query, TopDocs topDocs, IndexSearcher searcher) {
         List<String> contextList = new ArrayList<>();
         UnifiedHighlighter highlighter = new UnifiedHighlighter(searcher, analyzer);
+        PassageFormatter formatter = new DefaultPassageFormatter("<BB>", "</BB>", "... ", false);
+        highlighter.setFormatter(formatter);
         try {
             String[] fragments = highlighter.highlight(LuceneConstants.CONTENT, query, topDocs);
             for (String fragment: fragments) {
@@ -96,8 +100,8 @@ public class SearchUtil {
     }
 
     private static String getBestFragment(String fragment) throws Exception {
-        int startPosition = fragment.indexOf("<b>");
-        int endPosition = fragment.indexOf("</b>");
+        int startPosition = fragment.indexOf("<BB>");
+        int endPosition = fragment.indexOf("</BB>");
         if (startPosition == -1) {
             return "未获取查询结果摘要，请到特定文件搜索结果";
         }
@@ -108,7 +112,6 @@ public class SearchUtil {
             endPosition += 10;
         }
         return fragment.substring(startPosition, endPosition);
-
     }
 
     public static List<SearchedResult> executeSearch(String searchText, String searchField) {
