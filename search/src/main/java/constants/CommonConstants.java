@@ -11,7 +11,9 @@ public class CommonConstants {
     public static String INDEX_FILE_PATH = "index";
     public static String TOTAL_FILE_NUM;
     public static String FULL_SEARCH = "F";
-    public static String INPUT_FILE_PATH = "test-data";
     public static String ROOT_LAYOUT_PATH = "view/RootLayout.fxml";
     public static String SETTING_PATH = "view/Setting.fxml";
+    public static int MB = 1048576;
+
+    public static int LIMIT_FILE_SIZE;
 }

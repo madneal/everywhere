@@ -21,8 +21,7 @@ public class FileUtil {
                     fileBeansAddForDirectory(fileBeans, file);
                 }
             } else {
-                String extName = getFileExtension(file);
-                if (CommonConstants.DOCFILES.contains(extName)) {
+                if (isPassFileTest(file)) {
 //                    System.out.println("Scan file:" + path);
                     fileBeans.add(FileBeanParser.getFileBean(file));
                 }
@@ -54,6 +53,10 @@ public class FileUtil {
     private static String getFileExtension(File file) {
         String fileName = file.getName();
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    private static boolean isPassFileTest(File file) {
+        return CommonConstants.DOCFILES.contains(getFileExtension(file)) && (file.length() < CommonConstants.LIMIT_FILE_SIZE);
     }
 
     public static List<String> getDriver() {
