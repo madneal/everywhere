@@ -16,6 +16,8 @@ public class ConfigSetting {
 
     private List<String> inputDataPath;
 
+    private int limitFileSize;
+
     public String getSearchMethod() {
         return searchMethod;
     }
@@ -62,5 +64,13 @@ public class ConfigSetting {
 
     public void setInputDataPath(List<String> inputDataPath) {
         this.inputDataPath = inputDataPath;
+    }
+
+    public int getLimitFileSize() {
+        return limitFileSize;
+    }
+
+    public void setLimitFileSize(int limitFileSize) {
+        this.limitFileSize = limitFileSize;
     }
 }

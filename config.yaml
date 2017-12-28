@@ -5,3 +5,5 @@ fileList: [docx, doc, xls, xlsx, pdf, txt]
 hasCreateIndex: true
 inputDataPath: ['C:\Users\neal1\Documents\WeChat Files\Cafery\Files']
 searchMethod: F
+# MB
+limitFileSize: 100
