@@ -61,8 +61,8 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // only select the current cell
         try {
+            // only select the current cell
             tview.getSelectionModel().setCellSelectionEnabled(true);
             comboType.getItems().addAll(
                     "content",
@@ -100,6 +100,7 @@ public class Controller implements Initializable {
         CommonConstants.LIMIT_FILE_SIZE = configSetting.getLimitFileSize() * CommonConstants.MB;
         FileUtil.deleteFile(new File(CommonConstants.INDEX_FILE_PATH));
         IndexUtil.executeIndex(configSetting.getSearchMethod());
+
         if (configSetting.getHasCreateIndex() == false) {
             configSetting.setHasCreateIndex(true);
         }
@@ -169,9 +170,6 @@ public class Controller implements Initializable {
                                     cell.setTextFill(Color.GRAY);
                                     ClientWindow clientWindow = new ClientWindow();
                                     clientWindow.getHostServices().showDocument(cell.getText());
-                                    // handle right click on cell...
-                                    // access cell data with cell.getItem();
-                                    // access row data with (Person)cell.getTableRow().getItem();
                                 }
                             }
                         });
