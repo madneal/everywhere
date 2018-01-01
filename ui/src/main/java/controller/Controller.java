@@ -92,12 +92,7 @@ public class Controller implements Initializable {
     private void executeIndex() {
         tabPanel.getSelectionModel().select(1);
         System.setOut(ps);
-        System.setErr(ps);
-        ConfigSetting configSetting = ConfigController.readConfig();
-        CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
-        CommonConstants.DOCFILES = configSetting.getFileList();
-        CommonConstants.INPUT_DATA_PATH_LIST = configSetting.getInputDataPath();
-        CommonConstants.LIMIT_FILE_SIZE = configSetting.getLimitFileSize() * CommonConstants.MB;
+        ConfigSetting configSetting = initialConfig();
         FileUtil.deleteFile(new File(CommonConstants.INDEX_FILE_PATH));
         IndexUtil.executeIndex(configSetting.getSearchMethod());
 
@@ -105,6 +100,15 @@ public class Controller implements Initializable {
             configSetting.setHasCreateIndex(true);
         }
         ConfigController.writeConfigToYaml(configSetting);
+    }
+
+    private ConfigSetting initialConfig() {
+        ConfigSetting configSetting = ConfigController.readConfig();
+        CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
+        CommonConstants.DOCFILES = configSetting.getFileList();
+        CommonConstants.INPUT_DATA_PATH_LIST = configSetting.getInputDataPath();
+        CommonConstants.LIMIT_FILE_SIZE = configSetting.getLimitFileSize() * CommonConstants.MB;
+        return configSetting;
     }
 
     // add listener to the searchType change
