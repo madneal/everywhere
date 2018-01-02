@@ -56,12 +56,14 @@ public class FileUtil {
     }
 
     private static boolean isPassFileTest(File file) {
-        return CommonConstants.DOCFILES.contains(getFileExtension(file)) && (file.length() < CommonConstants.LIMIT_FILE_SIZE);
+        return CommonConstants.DOCFILES.contains(getFileExtension(file)) &&
+                (file.length() < CommonConstants.LIMIT_FILE_SIZE);
     }
 
     public static List<String> getDriver() {
         List<String> driverList = new ArrayList<>();
         File[] fs = File.listRoots();
+
         for (int i = 0; i < fs.length; i++) {
             driverList.add(fs[i].getAbsolutePath());
         }

@@ -38,6 +38,7 @@ public class FileBeanParser {
 
     private static String getContent(String filepath, InputStream is) throws Exception {
         String content = "";
+        
         if (filepath.endsWith(".doc") || filepath.endsWith(".docx")) {
             content = readDoc(filepath, is);
         } else if (filepath.endsWith(".xls") || filepath.endsWith(".xlsx")) {
