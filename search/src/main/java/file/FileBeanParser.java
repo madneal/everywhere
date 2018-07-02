@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -38,11 +39,11 @@ public class FileBeanParser {
 
     private static String getContent(String filepath, InputStream is) throws Exception {
         String content = "";
-        
+
         if (filepath.endsWith(".doc") || filepath.endsWith(".docx")) {
             content = readDoc(filepath, is);
         } else if (filepath.endsWith(".xls") || filepath.endsWith(".xlsx")) {
-            content = readExcel(filepath, is);
+            content = readExcel(is);
         } else if (filepath.endsWith(".pdf")) {
             content = readPdf(is);
         } else if (filepath.endsWith(".txt")) {
@@ -51,13 +52,19 @@ public class FileBeanParser {
         return content;
     }
 
+    public static FileMagic getFileMagic(InputStream is) throws IOException {
+        is = FileMagic.prepareToCheckMagic(is);
+        return FileMagic.valueOf(is);
+    }
+
     @SuppressWarnings("deprecation" )
-    private static String readExcel(String filePath, InputStream inp) throws Exception {
+    private static String readExcel(InputStream inp) throws Exception {
         Workbook wb;
         StringBuilder sb = new StringBuilder();
-        boolean isXls = filePath.endsWith("xls");
-        if (isXls) {
+        boolean isXls = false;
+        if (getFileMagic(inp) == FileMagic.OLE2) {
             wb = new HSSFWorkbook(inp);
+            isXls = true;
         } else {
             wb = StreamingReader.builder()
                     .rowCacheSize(1000)    // number of rows to keep in memory (defaults to 10)
