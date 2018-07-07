@@ -51,6 +51,17 @@ public class FilePathNode {
         for (int i = 0; i < increment; i++) {
             System.out.println(" ");
         }
-        System.out.println(incrementalPath + );
+        System.out.println(incrementalPath + (isLeaf() ? " -> " + data : ""));
+        for (FilePathNode node: children) {
+            node.printNode(increment + 2);
+        }
+        for (FilePathNode node: leafs) {
+            node.printNode(increment + 2);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return data;
     }
 }
