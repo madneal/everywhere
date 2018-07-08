@@ -16,7 +16,7 @@ public class FilePathTree {
 
     public void printTree() {
         getCommonRoot();
-        commonRoot.printNode(0);;
+        commonRoot.printNode(0);
     }
 
     public FilePathNode getCommonRoot() {
