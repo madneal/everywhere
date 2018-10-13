@@ -1,4 +1,4 @@
-package FilePath;
+package filepath;
 
 public class FilePathNodeTest {
 

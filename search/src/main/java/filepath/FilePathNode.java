@@ -1,4 +1,4 @@
-package FilePath;
+package filepath;
 
 import java.util.ArrayList;
 import java.util.Arrays;
