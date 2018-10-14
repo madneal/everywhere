@@ -4,4 +4,5 @@ out
 index
 logs
 */target
-*/.iml
+*/*.iml
+*.iml
