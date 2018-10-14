@@ -42,6 +42,12 @@ public class IndexUtil {
         }
     }
 
+
+    public static List<String> getFilePaths() {
+        List<String> result = new ArrayList<>();
+        return result;
+    }
+
     public static void indexForFiles(List<String> filepathList) {
         List<FileBean> fileBeanMyArray = new ArrayList<>(1);
         try {
