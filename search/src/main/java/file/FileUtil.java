@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,46 @@ public class FileUtil {
             logger.error(path, e);
         }
         return fileBeans;
+    }
+
+    public static List<String> getFileList(String folder) {
+        List<String> fileList = new ArrayList<>();
+        try {
+            File file = new File(folder);
+            if (file.isDirectory() && isPassExcludePath(folder)) {
+                fileAddForDirectory(fileList, file);
+            } else {
+                if (isFileLengthValid(file)) {
+                    if (isDocument(file)) {
+                        fileList.add(folder);
+                    }
+                    if (isCompressFile(file)) {
+                        fileList.add(folder);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileList;
+    }
+
+    public static boolean isCompressFile(File file) {
+        String extName = getFileExtension(file);
+        return CommonConstants.COMPRESS_FILES.contains(extName);
+    }
+
+    public static boolean isFileLengthValid(File file) {
+        return file.length() < CommonConstants.LIMIT_FILE_SIZE;
+    }
+
+    private static void fileAddForDirectory(List<String> fileList, File file) {
+        File[] files = file.listFiles();
+        if (files != null && files.length != 0) {
+            for (File f: files) {
+                fileList.addAll(getFileList(f.getAbsolutePath()));
+            }
+        }
     }
 
     private static void fileBeansAddForDirectory(List<FileBean> fileBeans, File file) throws Exception {
@@ -59,6 +100,12 @@ public class FileUtil {
         return CommonConstants.DOCFILES.contains(getFileExtension(file)) &&
                 (file.length() < CommonConstants.LIMIT_FILE_SIZE);
     }
+
+    private static boolean isDocument(File file) {
+        String extName = getFileExtension(file);
+        return CommonConstants.DOCFILES.contains(extName);
+    }
+
 
     public static List<String> getDriver() {
         List<String> driverList = new ArrayList<>();

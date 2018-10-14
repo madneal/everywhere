@@ -106,6 +106,7 @@ public class Controller implements Initializable {
         ConfigSetting configSetting = ConfigController.readConfig();
         CommonConstants.EXCLUDE_FILE_PATHS = configSetting.getExcludeFilePathList();
         CommonConstants.DOCFILES = configSetting.getFileList();
+        CommonConstants.COMPRESS_FILES = configSetting.getCompressFileList();
         CommonConstants.INPUT_DATA_PATH_LIST = configSetting.getInputDataPath();
         CommonConstants.LIMIT_FILE_SIZE = configSetting.getLimitFileSize() * CommonConstants.MB;
         return configSetting;
