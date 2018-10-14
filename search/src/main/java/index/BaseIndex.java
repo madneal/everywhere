@@ -10,7 +10,7 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
-import searchutils.UtilsTool;
+import utils.UtilsTool;
 
 import java.io.IOException;
 import java.util.List;
