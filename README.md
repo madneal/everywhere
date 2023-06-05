@@ -8,9 +8,9 @@ I wish this tool will perform just like its name!:smirk:
 ![](http://okja9ah81.bkt.clouddn.com/everywhere.gif)
 
 # Changelog
-For detailed changelog, please refer [CHANGELOG](https://github.com/neal1991/everywhere/blob/master/CHANGELOG.md)
+For detailed changelog, please refer [CHANGELOG](https://github.com/madneal/everywhere/blob/master/CHANGELOG.md)
 
-### v0.1.3 [:arrow_down:](https://github.com/neal1991/everywhere/releases/download/v0.1.3/app.zip)
+### v0.1.3 [:arrow_down:](https://github.com/madneal/everywhere/releases/download/v0.1.3/app.zip)
 * display the index process by a console
 * fix cannot tell docx and doc for some files
 * add about buton to see the website
@@ -57,4 +57,4 @@ For detailed changelog, please refer [CHANGELOG](https://github.com/neal1991/eve
 There are some config options in `config.yaml`. It can be used to config some environment for the application. For example, you can config `excludeFilePathList`,  and `fileList`. However, the fileList only includes `doc, docx, xls, xslx, txt,pdf`.
 
 # Licene
-[Apache License 2.0](https://github.com/neal1991/everywhere/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/madneal/everywhere/blob/master/LICENSE)
