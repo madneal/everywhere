@@ -1,9 +1,0 @@
-!!setting.ConfigSetting
-compressFileList: [zip, rar, 7z]
-excludeFilePathList: [node_modules, $RECYCLE.BIN, Program Files, Windows]
-fileList: [docx, doc, xls, xlsx, pdf, txt]
-hasCreateIndex: true
-inputDataPath: ['C:\Users\neal1\Documents\WeChat Files\Cafery\Files']
-searchMethod: F
-# MB
-limitFileSize: 100

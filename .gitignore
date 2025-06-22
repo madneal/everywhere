@@ -1,8 +1,0 @@
-target
-out
-.idea
-index
-logs
-*/target
-*/*.iml
-*.iml
