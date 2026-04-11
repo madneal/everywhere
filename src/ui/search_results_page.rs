@@ -10,8 +10,7 @@ const TITLE_BLUE: Color32 = Color32::from_rgb(26, 13, 171);
 const URL_GREEN: Color32 = Color32::from_rgb(0, 104, 55);
 const SNIPPET_GRAY: Color32 = Color32::from_rgb(77, 81, 86);
 const META_GRAY: Color32 = Color32::from_rgb(112, 117, 122);
-const TAB_ACTIVE: Color32 = Color32::from_rgb(32, 33, 36);
-const TAB_INACTIVE: Color32 = Color32::from_rgb(95, 99, 104);
+const SOURCE_TITLE: Color32 = Color32::from_rgb(32, 33, 36);
 
 pub enum SerpAction {
     None,
@@ -53,6 +52,83 @@ fn find_match(haystack: &str, term: &str) -> Option<usize> {
     }
 }
 
+fn merge_byte_spans(mut spans: Vec<(usize, usize)>) -> Vec<(usize, usize)> {
+    spans.sort_by_key(|s| s.0);
+    let mut out: Vec<(usize, usize)> = Vec::new();
+    for (s, e) in spans {
+        if s >= e {
+            continue;
+        }
+        if let Some(last) = out.last_mut() {
+            if s <= last.1 {
+                last.1 = last.1.max(e);
+            } else {
+                out.push((s, e));
+            }
+        } else {
+            out.push((s, e));
+        }
+    }
+    out
+}
+
+fn sanitize_spans(text_len: usize, spans: &[(usize, usize)]) -> Vec<(usize, usize)> {
+    spans
+        .iter()
+        .filter_map(|&(s, e)| {
+            if s < e && s < text_len {
+                Some((s, e.min(text_len)))
+            } else {
+                None
+            }
+        })
+        .collect()
+}
+
+fn snippet_layout_job_ranges(text: &str, ranges: &[(usize, usize)], font: FontId) -> LayoutJob {
+    let normal = TextFormat {
+        font_id: font.clone(),
+        color: SNIPPET_GRAY,
+        ..Default::default()
+    };
+    let hi = TextFormat {
+        font_id: FontId::new(14.0, font.family.clone()),
+        color: Color32::from_rgb(32, 33, 36),
+        ..Default::default()
+    };
+    let merged = merge_byte_spans(ranges.to_vec());
+    let mut job = LayoutJob::default();
+    let mut cursor = 0usize;
+    for (s, e) in merged {
+        if cursor < s && s <= text.len() {
+            job.append(&text[cursor..s], 0.0, normal.clone());
+        }
+        if s < e && e <= text.len() {
+            job.append(&text[s..e], 0.0, hi.clone());
+        }
+        cursor = cursor.max(e);
+    }
+    if cursor < text.len() {
+        job.append(&text[cursor..], 0.0, normal);
+    }
+    job
+}
+
+fn snippet_layout_for_excerpt(
+    text: &str,
+    query: &str,
+    engine_spans: &[(usize, usize)],
+    font: FontId,
+) -> LayoutJob {
+    let cleaned = sanitize_spans(text.len(), engine_spans);
+    let merged = merge_byte_spans(cleaned);
+    if !merged.is_empty() {
+        snippet_layout_job_ranges(text, &merged, font)
+    } else {
+        snippet_layout_job(text, query, font)
+    }
+}
+
 fn merged_highlight_ranges(text: &str, query: &str) -> Vec<(usize, usize)> {
     let terms = query_terms(query);
     let mut spans: Vec<(usize, usize)> = Vec::new();
@@ -88,9 +164,8 @@ fn snippet_layout_job(text: &str, query: &str, font: FontId) -> LayoutJob {
         ..Default::default()
     };
     let hi = TextFormat {
-        font_id: font.clone(),
-        color: SNIPPET_GRAY,
-        strong: true,
+        font_id: FontId::new(14.0, font.family.clone()),
+        color: Color32::from_rgb(32, 33, 36),
         ..Default::default()
     };
     let ranges = merged_highlight_ranges(text, query);
@@ -109,23 +184,6 @@ fn snippet_layout_job(text: &str, query: &str, font: FontId) -> LayoutJob {
         job.append(&text[cursor..], 0.0, normal);
     }
     job
-}
-
-fn breadcrumb(path: &Path) -> String {
-    let name = path
-        .file_name()
-        .and_then(|n| n.to_str())
-        .unwrap_or("");
-    let parent = path
-        .parent()
-        .and_then(|p| p.to_str())
-        .filter(|s| !s.is_empty())
-        .unwrap_or("");
-    if parent.is_empty() {
-        name.to_string()
-    } else {
-        format!("{} › {}", parent, name)
-    }
 }
 
 fn source_label(path: &Path) -> String {
@@ -154,7 +212,7 @@ fn favicon_letter(path: &Path) -> String {
 
 pub fn show(
     ui: &mut Ui,
-    search_field_id: egui::Id,
+    _search_field_id: egui::Id,
     query: &mut String,
     results: &[SearchResult],
     is_searching: bool,
@@ -180,13 +238,13 @@ pub fn show(
         .fill(Color32::WHITE)
         .stroke(Stroke::new(1.0, Color32::from_gray(210)))
         .rounding(Rounding::same(24.0))
-        .inner_margin(Margin::symmetric(18, 0))
+        .inner_margin(Margin::symmetric(18.0, 0.0))
         .show(ui, |ui| {
             ui.set_min_height(bar_h);
             ui.horizontal_centered(|ui| {
                 ui.add(
                     TextEdit::singleline(query)
-                        .id(search_field_id)
+                        .id(_search_field_id)
                         .frame(false)
                         .hint_text("Search")
                         .desired_width(ui.available_width() - 56.0),
@@ -195,33 +253,13 @@ pub fn show(
                     .add_sized(Vec2::new(40.0, bar_h - 8.0), egui::Button::new("🔍").small())
                     .on_hover_cursor(CursorIcon::PointingHand)
                     .clicked()
-                    || (ui.memory(|m| m.focus()) == Some(search_field_id)
-                        && ui.input(|i| i.key_pressed(egui::Key::Enter)))
                 {
                     action = SerpAction::SubmitSearch;
                 }
             });
         });
 
-    ui.add_space(8.0);
-    ui.horizontal(|ui| {
-        ui.spacing_mut().item_spacing.x = 20.0;
-        let tab = |ui: &mut Ui, label: &str, active: bool| {
-            let c = if active { TAB_ACTIVE } else { TAB_INACTIVE };
-            let mut rt = RichText::new(label).size(14.0).color(c);
-            if active {
-                rt = rt.strong();
-            }
-            ui.label(rt);
-        };
-        tab(ui, "All", true);
-        tab(ui, "Images", false);
-        tab(ui, "Videos", false);
-        tab(ui, "News", false);
-    });
-    ui.add_space(2.0);
-    ui.separator();
-    ui.add_space(12.0);
+    ui.add_space(20.0);
 
     if is_searching {
         ui.horizontal(|ui| {
@@ -274,18 +312,26 @@ pub fn show(
                             ui.label(
                                 RichText::new(source_label(&result.path))
                                     .size(14.0)
-                                    .color(TAB_ACTIVE),
+                                    .color(SOURCE_TITLE),
                             );
                             ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
                                 ui.label(RichText::new("⋮").color(META_GRAY));
                             });
                         });
                         ui.add_space(2.0);
-                        ui.label(
-                            RichText::new(breadcrumb(&result.path))
-                                .size(12.0)
-                                .color(URL_GREEN),
-                        );
+                        let path_str = result.path.display().to_string();
+                        if ui
+                            .link(
+                                RichText::new(&path_str)
+                                    .size(12.0)
+                                    .monospace()
+                                    .color(URL_GREEN),
+                            )
+                            .on_hover_text("Open file")
+                            .clicked()
+                        {
+                            action = SerpAction::OpenFile(i);
+                        }
                         ui.add_space(4.0);
                         let title = RichText::new(&result.title)
                             .size(20.0)
@@ -295,7 +341,12 @@ pub fn show(
                             action = SerpAction::OpenFile(i);
                         }
                         ui.add_space(4.0);
-                        let job = snippet_layout_job(&result.content, query, body_font.clone());
+                        let job = snippet_layout_for_excerpt(
+                            &result.content,
+                            query,
+                            &result.snippet_highlights,
+                            body_font.clone(),
+                        );
                         let sense = Sense::click();
                         let r = ui.add(egui::Label::new(job).sense(sense));
                         if r.clicked() {

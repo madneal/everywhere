@@ -8,7 +8,7 @@ use tantivy::snippet::SnippetGenerator;
 use tantivy::tokenizer::{
     LowerCaser, RegexTokenizer, RemoveLongFilter, TextAnalyzer,
 };
-use tantivy::{DocAddress, Index, IndexReader, IndexWriter, Searcher, TantivyDocument};
+use tantivy::{Index, IndexReader, IndexWriter, Searcher, TantivyDocument};
 
 const MIXED_TOKENIZER: &str = "mixed_cjk";
 const ROOTS_JSON: &str = "indexed_source_roots.json";
@@ -18,6 +18,8 @@ const TOKEN_PATTERN: &str = r"[A-Za-z0-9_]+|[\u{4E00}-\u{9FFF}\u{3400}-\u{4DBF}\
 pub struct SearchResult {
     pub title: String,
     pub content: String,
+    #[serde(default)]
+    pub snippet_highlights: Vec<(usize, usize)>,
     pub path: PathBuf,
     pub score: f32,
 }
@@ -147,11 +149,13 @@ impl SearchEngine {
                 .unwrap_or("")
                 .to_string();
 
-            let content = self.get_snippet(&searcher, &*query, doc_address)?;
+            let (content, snippet_highlights) =
+                self.get_snippet(&searcher, &*query, &retrieved_doc)?;
 
             results.push(SearchResult {
                 title,
                 content,
+                snippet_highlights,
                 path: PathBuf::from(path_str),
                 score,
             });
@@ -164,12 +168,38 @@ impl SearchEngine {
         &self,
         searcher: &Searcher,
         query: &dyn Query,
-        doc_address: DocAddress,
-    ) -> Result<String> {
-        let snippet_generator = SnippetGenerator::create(searcher, query, self.content_field)?;
-        let doc: TantivyDocument = searcher.doc(doc_address)?;
-        let snippet = snippet_generator.snippet_from_doc(&doc);
-        Ok(snippet.fragment().to_string())
+        doc: &TantivyDocument,
+    ) -> Result<(String, Vec<(usize, usize)>)> {
+        let mut snippet_generator = SnippetGenerator::create(searcher, query, self.content_field)?;
+        snippet_generator.set_max_num_chars(360);
+        let snippet = snippet_generator.snippet_from_doc(doc);
+        let mut fragment = snippet.fragment().to_string();
+        let mut highlights: Vec<(usize, usize)> = snippet
+            .highlighted()
+            .iter()
+            .map(|r| (r.start, r.end))
+            .collect();
+        if !fragment.is_empty() {
+            return Ok((fragment, highlights));
+        }
+        let mut gen_title = SnippetGenerator::create(searcher, query, self.title_field)?;
+        gen_title.set_max_num_chars(160);
+        let sn_title = gen_title.snippet_from_doc(doc);
+        if !sn_title.fragment().is_empty() {
+            fragment = sn_title.fragment().to_string();
+            highlights = sn_title
+                .highlighted()
+                .iter()
+                .map(|r| (r.start, r.end))
+                .collect();
+            return Ok((fragment, highlights));
+        }
+        let full = doc
+            .get_first(self.content_field)
+            .and_then(|v| v.as_str())
+            .unwrap_or("");
+        fragment = full.chars().take(320).collect();
+        Ok((fragment, Vec::new()))
     }
 
     pub fn get_writer(&self) -> Result<IndexWriter> {

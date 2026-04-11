@@ -134,156 +134,159 @@ impl MainWindow {
         }
 
         let page = Color32::from_rgb(252, 252, 250);
+        let serp_bg = Color32::WHITE;
         CentralPanel::default()
-            .frame(Frame::central_panel(ctx.style().as_ref()).fill(page))
+            .frame(
+                Frame::central_panel(ctx.style().as_ref()).fill(match self.active_view {
+                    ActiveView::Home => page,
+                    ActiveView::Serp => serp_bg,
+                }),
+            )
             .show(ctx, |ui| {
-                ui.vertical_centered(|ui| {
-                    ui.set_max_width(720.0);
+                match self.active_view {
+                    ActiveView::Home => {
+                        ui.vertical_centered(|ui| {
+                            ui.set_max_width(720.0);
 
-                    ui.add_space(48.0);
+                            ui.add_space(48.0);
 
-                    ui.horizontal(|ui| {
-                        let word_w = 9.0 * 22.0;
-                        ui.add_space((ui.available_width() - word_w).max(0.0) * 0.5);
-                        ui.horizontal(|ui| {
-                            let palette: &[(u8, u8, u8)] = &[
-                                (66, 133, 244),
-                                (234, 67, 53),
-                                (251, 188, 5),
-                                (52, 168, 83),
-                            ];
-                            for (i, ch) in "Everywhere".chars().enumerate() {
-                                let (r, g, b) = palette[i % palette.len()];
-                                ui.push_id(i, |ui| {
-                                    ui.label(
-                                        RichText::new(ch.to_string())
-                                            .size(34.0)
-                                            .strong()
-                                            .color(Color32::from_rgb(r, g, b)),
-                                    );
-                                });
-                            }
-                        });
-                    });
-
-                    ui.add_space(26.0);
-
-                    let search_w = 560.0_f32;
-                    ui.horizontal(|ui| {
-                        ui.add_space((ui.available_width() - search_w).max(0.0) * 0.5);
-                        ui.add(
-                            TextEdit::singleline(&mut self.search_query)
-                                .id(search_field_id())
-                                .hint_text("Search indexed files")
-                                .desired_width(search_w)
-                                .frame(true)
-                                .margin(Vec2::new(16.0, 14.0)),
-                        );
-                    });
-
-                    ui.add_space(18.0);
-
-                    ui.horizontal(|ui| {
-                        let row_w = 132.0_f32;
-                        ui.add_space((ui.available_width() - row_w).max(0.0) * 0.5);
-                        if ui
-                            .add_sized(Vec2::new(132.0, 36.0), egui::Button::new("Index folder"))
-                            .clicked()
-                        {
-                            if let Some(path) = rfd::FileDialog::new().pick_folder() {
-                                self.start_index(path);
-                            }
-                        }
-                    });
-
-                    ui.add_space(10.0);
-                    ui.label(
-                        RichText::new(&self.index_status)
-                            .small()
-                            .color(Color32::from_gray(100)),
-                    );
-
-                    if !self.indexed_roots.is_empty() {
-                        ui.add_space(20.0);
-                        ui.label(
-                            RichText::new("Indexed folders (top-level paths)")
-                                .small()
-                                .strong()
-                                .color(Color32::from_gray(55)),
-                        );
-                        ui.add_space(6.0);
-                        ScrollArea::vertical()
-                            .id_source("everywhere_indexed_roots")
-                            .max_height(100.0)
-                            .show(ui, |ui| {
-                                ui.set_max_width(640.0);
-                                for p in &self.indexed_roots {
-                                    ui.label(
-                                        RichText::new(p.display().to_string())
-                                            .small()
-                                            .monospace()
-                                            .color(Color32::from_gray(75)),
-                                    );
-                                }
-                            });
-                    }
-
-                    if self.is_searching {
-                        ui.add_space(24.0);
-                        ui.horizontal(|ui| {
-                            ui.add_space((ui.available_width() - 100.0).max(0.0) * 0.5);
-                            ui.spinner();
-                            ui.label("Searching...");
-                        });
-                    } else if !self.search_results.is_empty() {
-                        ui.add_space(28.0);
-                        ui.separator();
-                        ui.add_space(14.0);
-
-                        let avail_h = ui.available_height().max(120.0);
-                        ScrollArea::vertical()
-                            .id_source("everywhere_search_results")
-                            .max_height(avail_h - 8.0)
-                            .show(ui, |ui| {
-                                ui.set_max_width(680.0);
-                                for (i, result) in self.search_results.iter().enumerate() {
-                                    ui.add_space(10.0);
-                                    ui.label(
-                                        RichText::new(&result.title)
-                                            .strong()
-                                            .size(17.0)
-                                            .color(Color32::from_rgb(26, 13, 171)),
-                                    );
-                                    ui.label(
-                                        RichText::new(result.path.display().to_string())
-                                            .small()
-                                            .color(Color32::from_rgb(0, 104, 55)),
-                                    );
-                                    ui.label(
-                                        RichText::new(&result.content)
-                                            .small()
-                                            .color(Color32::from_gray(70)),
-                                    );
-                                    let open = ui
-                                        .push_id(i, |ui| ui.small_button("Open file").clicked())
-                                        .inner;
-                                    if open {
-                                        self.open_file(&result.path);
+                            ui.horizontal(|ui| {
+                                let word_w = 9.0 * 22.0;
+                                ui.add_space((ui.available_width() - word_w).max(0.0) * 0.5);
+                                ui.horizontal(|ui| {
+                                    let palette: &[(u8, u8, u8)] = &[
+                                        (66, 133, 244),
+                                        (234, 67, 53),
+                                        (251, 188, 5),
+                                        (52, 168, 83),
+                                    ];
+                                    for (i, ch) in "Everywhere".chars().enumerate() {
+                                        let (r, g, b) = palette[i % palette.len()];
+                                        ui.push_id(i, |ui| {
+                                            ui.label(
+                                                RichText::new(ch.to_string())
+                                                    .size(34.0)
+                                                    .strong()
+                                                    .color(Color32::from_rgb(r, g, b)),
+                                            );
+                                        });
                                     }
-                                    ui.add_space(6.0);
+                                });
+                            });
+
+                            ui.add_space(26.0);
+
+                            let search_w = 560.0_f32;
+                            ui.horizontal(|ui| {
+                                ui.add_space((ui.available_width() - search_w).max(0.0) * 0.5);
+                                ui.add(
+                                    TextEdit::singleline(&mut self.search_query)
+                                        .id(search_field_id())
+                                        .hint_text("Search indexed files")
+                                        .desired_width(search_w)
+                                        .frame(true)
+                                        .margin(Vec2::new(16.0, 14.0)),
+                                );
+                            });
+
+                            ui.add_space(6.0);
+                            ui.label(
+                                RichText::new("Press Enter to open results")
+                                    .small()
+                                    .color(Color32::from_gray(130)),
+                            );
+
+                            ui.add_space(18.0);
+
+                            ui.horizontal(|ui| {
+                                let row_w = 132.0_f32;
+                                ui.add_space((ui.available_width() - row_w).max(0.0) * 0.5);
+                                if ui
+                                    .add_sized(Vec2::new(132.0, 36.0), egui::Button::new("Index folder"))
+                                    .clicked()
+                                {
+                                    if let Some(path) = rfd::FileDialog::new().pick_folder() {
+                                        self.start_index(path);
+                                    }
                                 }
                             });
-                    } else {
-                        ui.add_space(28.0);
-                        ui.label(
-                            RichText::new(
-                                "Index a folder, then search across PDF, Office, Markdown, and text files.",
-                            )
-                            .small()
-                            .color(Color32::from_gray(130)),
-                        );
+
+                            ui.add_space(10.0);
+                            ui.label(
+                                RichText::new(&self.index_status)
+                                    .small()
+                                    .color(Color32::from_gray(100)),
+                            );
+
+                            if !self.indexed_roots.is_empty() {
+                                ui.add_space(20.0);
+                                ui.label(
+                                    RichText::new("Indexed folders (top-level paths)")
+                                        .small()
+                                        .strong()
+                                        .color(Color32::from_gray(55)),
+                                );
+                                ui.add_space(6.0);
+                                ScrollArea::vertical()
+                                    .id_source("everywhere_indexed_roots")
+                                    .max_height(100.0)
+                                    .show(ui, |ui| {
+                                        ui.set_max_width(640.0);
+                                        for p in &self.indexed_roots {
+                                            ui.label(
+                                                RichText::new(p.display().to_string())
+                                                    .small()
+                                                    .monospace()
+                                                    .color(Color32::from_gray(75)),
+                                            );
+                                        }
+                                    });
+                            }
+
+                            ui.add_space(28.0);
+                            ui.label(
+                                RichText::new(
+                                    "Index a folder, then search across PDF, Office, Markdown, and text files.",
+                                )
+                                .small()
+                                .color(Color32::from_gray(130)),
+                            );
+                        });
                     }
-                });
+                    ActiveView::Serp => {
+                        ui.with_layout(Layout::top_down(Align::Min), |ui| {
+                            ui.add_space(20.0);
+                            ui.horizontal(|ui| {
+                                ui.add_space(24.0);
+                                ui.vertical(|ui| {
+                                    let action = search_results_page::show(
+                                        ui,
+                                        search_field_id(),
+                                        &mut self.search_query,
+                                        &self.search_results,
+                                        self.is_searching,
+                                    );
+                                    match action {
+                                        SerpAction::None => {}
+                                        SerpAction::SubmitSearch => {
+                                            if !self.search_query.trim().is_empty() {
+                                                self.perform_search();
+                                            }
+                                        }
+                                        SerpAction::OpenFile(i) => {
+                                            if let Some(r) = self.search_results.get(i) {
+                                                self.open_file(&r.path);
+                                            }
+                                        }
+                                        SerpAction::GoHome => {
+                                            self.active_view = ActiveView::Home;
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    }
+                }
             });
     }
 

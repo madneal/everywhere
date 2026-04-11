@@ -25,6 +25,9 @@ impl DocumentSearchApp {
 
 impl eframe::App for DocumentSearchApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        if ctx.input(|i| i.viewport().close_requested()) {
+            ctx.memory_mut(|mem| mem.stop_text_input());
+        }
         self.main_window.update(ctx);
     }
 }
