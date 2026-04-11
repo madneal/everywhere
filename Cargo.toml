@@ -1,41 +1,30 @@
 [package]
 name = "everywhere"
-version = "0.22.0"
-authors = ["Paul Masurel <paul.masurel@gmail.com>"]
-
-description = """Command line interface for Tantivy, a search engine library."""
-documentation = "https://github.com/madneal/everywhere"
-homepage = "https://github.com/madneal/everywhere"
-repository = "https://github.com/madneal/everywhere"
-
-readme = "README.md"
-keywords = ["search", "information", "retrieval"]
-license = "MIT"
+version = "0.1.0"
 edition = "2021"
+rust-version = "1.88"
+description = "Local document indexer and search GUI"
+license = "MIT"
 
 [dependencies]
-time = "0.3"
-iron = "0.6"
-staticfile = "0.5"
-serde = "1.0"
-serde_derive = "1.0"
+eframe = "0.24"
+egui = "0.24"
+tantivy = "0.22"
+tokio = { version = "1.35", features = ["rt-multi-thread", "macros", "fs", "io-util"] }
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
 serde_json = "1.0"
-persistent = "0.4"
-clap = "4"
-ansi_term = "0.12"
-urlencoded = "0.6"
-mount = "0.4"
-log = "0.4"
-env_logger = "0.10"
-tantivy = { git = "https://github.com/quickwit-oss/tantivy/", rev = "5b1bf1a"}
-crossbeam-channel = "0.5.8"
+walkdir = "2.4"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rfd = "0.12"
+opener = "0.6"
+pdf-extract = "0.7"
+zip = { version = "0.6", default-features = false, features = ["deflate"] }
+regex = "1.10"
+parking_lot = "0.12"
+"pulldown-cmark" = "0.12.2"
 
 [[bin]]
-name = "tantivy"
+name = "everywhere"
 path = "src/main.rs"
-
-
-[profile.release]
-opt-level = 3
-debug = true
-debug-assertions = false

@@ -8,5 +8,6 @@ pub async fn extract_text(path: &Path) -> Result<String> {
         let bytes = std::fs::read(&path)?;
         let content = pdf_extract::extract_text_from_mem(&bytes)?;
         Ok(content)
-    }).await?
+    })
+    .await?
 }
