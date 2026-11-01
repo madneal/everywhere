@@ -63,6 +63,33 @@ fn markdown_to_plain(src: &str) -> String {
     out
 }
 
+pub fn plain_from_raw_source(raw: &str) -> String {
+    plain_from_raw(raw)
+}
+
+fn plain_from_raw(raw: &str) -> String {
+    let stripped = strip_front_matter(raw);
+    let mut plain = markdown_to_plain(stripped);
+    if plain.trim().is_empty() && !raw.trim().is_empty() {
+        plain = markdown_to_plain(raw);
+    }
+    if plain.trim().is_empty() && !raw.trim().is_empty() {
+        plain = raw.to_string();
+    }
+    plain
+}
+
+pub fn extract_text_blocking(path: &Path) -> Result<String> {
+    let raw = match std::fs::read_to_string(path) {
+        Ok(s) => s,
+        Err(_) => {
+            let b = std::fs::read(path)?;
+            String::from_utf8_lossy(&b).into_owned()
+        }
+    };
+    Ok(plain_from_raw(&raw))
+}
+
 pub async fn extract_text(path: &Path) -> Result<String> {
     let raw = match fs::read_to_string(path).await {
         Ok(s) => s,
@@ -71,13 +98,5 @@ pub async fn extract_text(path: &Path) -> Result<String> {
             String::from_utf8_lossy(&b).into_owned()
         }
     };
-    let stripped = strip_front_matter(&raw);
-    let mut plain = markdown_to_plain(stripped);
-    if plain.trim().is_empty() && !raw.trim().is_empty() {
-        plain = markdown_to_plain(&raw);
-    }
-    if plain.trim().is_empty() && !raw.trim().is_empty() {
-        plain = raw.clone();
-    }
-    Ok(plain)
+    Ok(plain_from_raw(&raw))
 }

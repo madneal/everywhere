@@ -25,3 +25,11 @@ pub async fn parse_text_lossy(path: &Path) -> Result<String> {
 pub async fn parse_markdown(path: &Path) -> Result<String> {
     markdown::extract_text(path).await
 }
+
+pub fn parse_markdown_blocking(path: &Path) -> Result<String> {
+    markdown::extract_text_blocking(path)
+}
+
+pub fn markdown_plain_from_bytes(raw: &str) -> String {
+    markdown::plain_from_raw_source(raw)
+}

@@ -1,10 +1,12 @@
 use crate::search::SearchResult;
 use egui::{
-    Align, Color32, CursorIcon, FontId, Frame, Layout, Margin, RichText, Rounding, ScrollArea,
-    Sense, Stroke, TextEdit, Ui, Vec2,
+    Align, Color32, CursorIcon, FontId, Frame, Layout, Margin, RichText, Rounding, ScrollArea, Sense,
+    Stroke, TextEdit, TextFormat, Ui, Vec2,
 };
-use egui::text::{LayoutJob, TextFormat};
+use egui::text::LayoutJob;
 use std::path::Path;
+
+const SNIPPET_DISPLAY_MAX_CHARS: usize = 800;
 
 const TITLE_BLUE: Color32 = Color32::from_rgb(26, 13, 171);
 const URL_GREEN: Color32 = Color32::from_rgb(0, 104, 55);
@@ -19,171 +21,86 @@ pub enum SerpAction {
     GoHome,
 }
 
-fn query_terms(query: &str) -> Vec<String> {
-    let q = query.trim();
-    if q.is_empty() {
-        return Vec::new();
-    }
-    if q.chars().any(|c| c.is_ascii_whitespace()) {
-        q.split_whitespace().map(|s| s.to_string()).filter(|s| !s.is_empty()).collect()
-    } else {
-        vec![q.to_string()]
-    }
-}
-
-fn find_match(haystack: &str, term: &str) -> Option<usize> {
-    if term.is_empty() {
-        return None;
-    }
-    if term.is_ascii() {
-        for (idx, _) in haystack.char_indices() {
-            if let Some(tail) = haystack.get(idx..) {
-                if tail.len() >= term.len() {
-                    let slice = &tail[..term.len()];
-                    if slice.eq_ignore_ascii_case(term) {
-                        return Some(idx);
-                    }
-                }
-            }
-        }
-        None
-    } else {
-        haystack.find(term)
-    }
-}
-
-fn merge_byte_spans(mut spans: Vec<(usize, usize)>) -> Vec<(usize, usize)> {
-    spans.sort_by_key(|s| s.0);
-    let mut out: Vec<(usize, usize)> = Vec::new();
-    for (s, e) in spans {
-        if s >= e {
-            continue;
-        }
-        if let Some(last) = out.last_mut() {
-            if s <= last.1 {
-                last.1 = last.1.max(e);
-            } else {
-                out.push((s, e));
-            }
-        } else {
-            out.push((s, e));
-        }
-    }
-    out
-}
-
-fn sanitize_spans(text_len: usize, spans: &[(usize, usize)]) -> Vec<(usize, usize)> {
-    spans
-        .iter()
+fn clip_highlights(hls: &[(usize, usize)], end_byte: usize) -> Vec<(usize, usize)> {
+    hls.iter()
         .filter_map(|&(s, e)| {
-            if s < e && s < text_len {
-                Some((s, e.min(text_len)))
-            } else {
-                None
+            if s >= end_byte {
+                return None;
             }
+            Some((s, e.min(end_byte)))
         })
         .collect()
 }
 
-fn snippet_layout_job_ranges(text: &str, ranges: &[(usize, usize)], font: FontId) -> LayoutJob {
+fn snippet_layout_job(content: &str, highlights: &[(usize, usize)]) -> LayoutJob {
+    let font = FontId::proportional(14.0);
     let normal = TextFormat {
         font_id: font.clone(),
         color: SNIPPET_GRAY,
         ..Default::default()
     };
     let hi = TextFormat {
-        font_id: FontId::new(14.0, font.family.clone()),
-        color: Color32::from_rgb(32, 33, 36),
+        font_id: font,
+        color: TITLE_BLUE,
         ..Default::default()
     };
-    let merged = merge_byte_spans(ranges.to_vec());
     let mut job = LayoutJob::default();
-    let mut cursor = 0usize;
-    for (s, e) in merged {
-        if cursor < s && s <= text.len() {
-            job.append(&text[cursor..s], 0.0, normal.clone());
+    let mut hls: Vec<(usize, usize)> = highlights
+        .iter()
+        .filter(|(s, e)| s < e && *e <= content.len())
+        .copied()
+        .collect();
+    hls.sort_by_key(|x| x.0);
+    let mut pos = 0usize;
+    for (s, e) in hls {
+        let s = s.max(pos);
+        if s >= content.len() {
+            break;
         }
-        if s < e && e <= text.len() {
-            job.append(&text[s..e], 0.0, hi.clone());
+        let e = e.min(content.len());
+        if s > pos {
+            job.append(&content[pos..s], 0.0, normal.clone());
         }
-        cursor = cursor.max(e);
+        if e > s {
+            job.append(&content[s..e], 0.0, hi.clone());
+        }
+        pos = e;
     }
-    if cursor < text.len() {
-        job.append(&text[cursor..], 0.0, normal);
+    if pos < content.len() {
+        job.append(&content[pos..], 0.0, normal);
     }
     job
 }
 
-fn snippet_layout_for_excerpt(
-    text: &str,
-    query: &str,
-    engine_spans: &[(usize, usize)],
-    font: FontId,
-) -> LayoutJob {
-    let cleaned = sanitize_spans(text.len(), engine_spans);
-    let merged = merge_byte_spans(cleaned);
-    if !merged.is_empty() {
-        snippet_layout_job_ranges(text, &merged, font)
-    } else {
-        snippet_layout_job(text, query, font)
+fn paint_snippet(ui: &mut Ui, content: &str, highlights: &[(usize, usize)]) -> bool {
+    let w = ui.available_width().max(1.0);
+    if content.trim().is_empty() {
+        ui.label(
+            RichText::new("（未读取到正文，请确认文件在本地且路径与索引一致）")
+                .size(13.0)
+                .color(META_GRAY),
+        );
+        return false;
     }
-}
-
-fn merged_highlight_ranges(text: &str, query: &str) -> Vec<(usize, usize)> {
-    let terms = query_terms(query);
-    let mut spans: Vec<(usize, usize)> = Vec::new();
-    for term in terms {
-        let mut from = 0;
-        while let Some(rel) = find_match(&text[from..], &term) {
-            let start = from + rel;
-            let end = start + term.len();
-            spans.push((start, end));
-            from = start + term.chars().next().map(|c| c.len_utf8()).unwrap_or(1);
-        }
+    let mut end = content.len();
+    if content.chars().count() > SNIPPET_DISPLAY_MAX_CHARS {
+        end = content
+            .char_indices()
+            .nth(SNIPPET_DISPLAY_MAX_CHARS)
+            .map(|(b, _)| b)
+            .unwrap_or(content.len());
     }
-    spans.sort_by_key(|&(s, _)| s);
-    let mut merged: Vec<(usize, usize)> = Vec::new();
-    for (s, e) in spans {
-        if let Some(last) = merged.last_mut() {
-            if s <= last.1 {
-                last.1 = last.1.max(e);
-            } else {
-                merged.push((s, e));
-            }
-        } else {
-            merged.push((s, e));
-        }
-    }
-    merged
-}
-
-fn snippet_layout_job(text: &str, query: &str, font: FontId) -> LayoutJob {
-    let normal = TextFormat {
-        font_id: font.clone(),
-        color: SNIPPET_GRAY,
-        ..Default::default()
-    };
-    let hi = TextFormat {
-        font_id: FontId::new(14.0, font.family.clone()),
-        color: Color32::from_rgb(32, 33, 36),
-        ..Default::default()
-    };
-    let ranges = merged_highlight_ranges(text, query);
-    let mut job = LayoutJob::default();
-    let mut cursor = 0usize;
-    for (s, e) in ranges {
-        if cursor < s && s <= text.len() {
-            job.append(&text[cursor..s], 0.0, normal.clone());
-        }
-        if s < e && e <= text.len() {
-            job.append(&text[s..e], 0.0, hi.clone());
-        }
-        cursor = cursor.max(e);
-    }
-    if cursor < text.len() {
-        job.append(&text[cursor..], 0.0, normal);
-    }
-    job
+    let slice = content.get(..end).unwrap_or(content);
+    let hls = clip_highlights(highlights, end);
+    let job = snippet_layout_job(slice, &hls);
+    ui.set_width(w);
+    ui.add(
+        egui::Label::new(job)
+            .wrap(true)
+            .sense(Sense::click()),
+    )
+    .on_hover_cursor(CursorIcon::PointingHand)
+    .clicked()
 }
 
 fn source_label(path: &Path) -> String {
@@ -278,7 +195,6 @@ pub fn show(
         return action;
     }
 
-    let body_font = FontId::proportional(14.0);
     let avail_h = ui.available_height().max(160.0);
     ScrollArea::vertical()
         .id_source("everywhere_serp_results")
@@ -288,26 +204,30 @@ pub fn show(
             for (i, result) in results.iter().enumerate() {
                 ui.add_space(18.0);
                 ui.horizontal_top(|ui| {
-                    let letter = favicon_letter(&result.path);
-                    let fav = favicon_color(&result.path);
-                    Frame::none()
-                        .fill(fav.linear_multiply(0.35))
-                        .stroke(Stroke::new(1.0, Color32::from_gray(220)))
-                        .rounding(Rounding::same(10.0))
-                        .inner_margin(Margin::same(6.0))
-                        .show(ui, |ui| {
-                            ui.set_min_size(Vec2::new(28.0, 28.0));
-                            ui.centered_and_justified(|ui| {
-                                ui.label(
-                                    RichText::new(letter)
-                                        .size(13.0)
-                                        .strong()
-                                        .color(Color32::WHITE),
-                                );
+                    ui.vertical(|ui| {
+                        ui.set_width(40.0);
+                        let letter = favicon_letter(&result.path);
+                        let fav = favicon_color(&result.path);
+                        Frame::none()
+                            .fill(fav.linear_multiply(0.35))
+                            .stroke(Stroke::new(1.0, Color32::from_gray(220)))
+                            .rounding(Rounding::same(10.0))
+                            .inner_margin(Margin::same(6.0))
+                            .show(ui, |ui| {
+                                ui.set_min_size(Vec2::new(28.0, 28.0));
+                                ui.centered_and_justified(|ui| {
+                                    ui.label(
+                                        RichText::new(letter)
+                                            .size(13.0)
+                                            .strong()
+                                            .color(Color32::WHITE),
+                                    );
+                                });
                             });
-                        });
+                    });
                     ui.add_space(12.0);
                     ui.vertical(|ui| {
+                        ui.set_width(ui.available_width());
                         ui.horizontal(|ui| {
                             ui.label(
                                 RichText::new(source_label(&result.path))
@@ -341,18 +261,9 @@ pub fn show(
                             action = SerpAction::OpenFile(i);
                         }
                         ui.add_space(4.0);
-                        let job = snippet_layout_for_excerpt(
-                            &result.content,
-                            query,
-                            &result.snippet_highlights,
-                            body_font.clone(),
-                        );
-                        let sense = Sense::click();
-                        let r = ui.add(egui::Label::new(job).sense(sense));
-                        if r.clicked() {
+                        if paint_snippet(ui, &result.content, &result.snippet_highlights) {
                             action = SerpAction::OpenFile(i);
                         }
-                        r.on_hover_cursor(CursorIcon::PointingHand);
                     });
                 });
             }

@@ -66,6 +66,7 @@ pub struct MainWindow {
     search_query: String,
     search_results: Vec<SearchResult>,
     is_searching: bool,
+    search_done_rx: Option<Receiver<Result<Vec<SearchResult>, String>>>,
     index_done_rx: Option<Receiver<Result<(), String>>>,
     index_status: String,
     indexing: bool,
@@ -87,6 +88,7 @@ impl MainWindow {
             search_query: String::new(),
             search_results: Vec::new(),
             is_searching: false,
+            search_done_rx: None,
             index_done_rx: None,
             index_status: "Choose a folder to build the search index.".to_string(),
             indexing: false,
@@ -108,6 +110,31 @@ impl MainWindow {
 
         if self.indexing {
             ctx.request_repaint_after(Duration::from_millis(200));
+        }
+        if self.search_done_rx.is_some() {
+            ctx.request_repaint_after(Duration::from_millis(32));
+        }
+
+        if let Some(rx) = &self.search_done_rx {
+            match rx.try_recv() {
+                Ok(Ok(results)) => {
+                    self.search_done_rx = None;
+                    self.is_searching = false;
+                    self.search_results = results;
+                }
+                Ok(Err(e)) => {
+                    self.search_done_rx = None;
+                    self.is_searching = false;
+                    self.search_results.clear();
+                    tracing::error!("search failed: {}", e);
+                }
+                Err(std::sync::mpsc::TryRecvError::Empty) => {}
+                Err(std::sync::mpsc::TryRecvError::Disconnected) => {
+                    self.search_done_rx = None;
+                    self.is_searching = false;
+                    self.search_results.clear();
+                }
+            }
         }
 
         if let Some(rx) = &self.index_done_rx {
@@ -294,17 +321,21 @@ impl MainWindow {
         if self.search_query.trim().is_empty() {
             return;
         }
-        self.is_searching = true;
-        match self.search_engine.lock().search(&self.search_query, 20) {
-            Ok(results) => {
-                self.search_results = results;
-            }
-            Err(e) => {
-                tracing::error!("search failed: {}", e);
-                self.search_results.clear();
-            }
+        if self.search_done_rx.is_some() {
+            return;
         }
-        self.is_searching = false;
+        self.is_searching = true;
+        let query = self.search_query.clone();
+        let eng = Arc::clone(&self.search_engine);
+        let (tx, rx) = std::sync::mpsc::channel();
+        std::thread::spawn(move || {
+            let res = eng
+                .lock()
+                .search(&query, 20)
+                .map_err(|e| e.to_string());
+            let _ = tx.send(res);
+        });
+        self.search_done_rx = Some(rx);
     }
 
     fn start_index(&mut self, path: std::path::PathBuf) {
